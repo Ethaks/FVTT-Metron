@@ -46,10 +46,10 @@ You can build the project by running
 npm run build
 ```
 
-Alternatively, you can run
+Alternatively, after having built the module at least once and having linked its `dist` directory, you can run
 
 ```bash
-npm run build:serve
+npm run serve
 ```
 
 to start a development server available at `http://localhost:30001`.
