@@ -27,5 +27,10 @@
   "socket": false,
   "manifest": "This is auto replaced",
   "download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.0.1/module.zip",
-  "library": false
+  "library": false,
+  "flags": {
+    "fvttdevleague": {
+      "package-jam": 2022
+    }
+  }
 }
