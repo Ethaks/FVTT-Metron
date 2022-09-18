@@ -51,7 +51,7 @@ const config = defineConfig(() => {
       rollupOptions: {
         output: {
           sourcemapPathTransform: (relative) => {
-            // Relative paths start with a `../`, which moves the path out of the `modules/metron1` directory.
+            // Relative paths start with a `../`, which moves the path out of the `modules/metron` directory.
             if (relative.startsWith("../")) relative = relative.replace("../", "");
             return relative;
           },

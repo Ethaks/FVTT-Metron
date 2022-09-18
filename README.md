@@ -17,6 +17,14 @@ Scenes and compendiums have their `Convert` button in their right-click menu.
 
 The used conversion rates do not strictly follow real word ones, but adhere to the simplified rules, e.g. 5 feet are converted to 1.5 meters.
 
+## Supported Languages
+
+By default, Metron always converts units written in English (e.g. `5 ft`, or `2 miles`).
+Additional languages are added dependent on the currently active language of FoundryVTT.
+
+- English (always active)
+- Japanese
+
 ## Installation
 
 Install the module from the Foundry VTT module browser or by pasting the following URL in the module installation's manifest URL field:
