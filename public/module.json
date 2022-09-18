@@ -3,51 +3,29 @@
   "name": "metron",
   "title": "Metron",
   "description": "Convert measurements from the metric system to the imperial system and vice versa.",
-  "authors": [
-    {
-      "name": "Ethaks",
-      "email": "ethaks@pm.me",
-      "discord": "Ethaks#2903"
-    }
-  ],
+  "authors": [{ "name": "Ethaks", "email": "ethaks@pm.me", "discord": "Ethaks#2903" }],
   "url": "This is auto replaced",
   "license": "MIT",
   "readme": "https://github.com/Ethaks/FVTT-Metron/blob/master/README.md",
   "bugs": "https://github.com/Ethaks/FVTT-Metron/issues",
   "changelog": "https://github.com/Ethaks/FVTT-Metron/blob/master/CHANGELOG.md",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
-  "compatibility": {
-    "minimum": "9",
-    "verified": "9"
-  },
+  "compatibility": { "minimum": "9", "verified": "9" },
   "esmodules": ["metron.js"],
   "styles": ["style.css"],
   "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "ja",
-      "name": "日本語",
-      "path": "lang/ja.json"
-    }
+    { "lang": "en", "name": "English", "path": "lang/en.json" },
+    { "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
   ],
   "relationships": {
-    "systems": [
-      {
-        "id": "dnd5e",
-        "verified": "2.0.0"
-      }
-    ],
+    "systems": [{ "id": "dnd5e", "verified": "2.0.0" }],
     "requires": [],
     "conflicts": []
   },
   "socket": false,
   "manifest": "This is auto replaced",
-  "download": "This is auto replaced",
+  "download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.0.1/module.zip",
   "library": false
 }
