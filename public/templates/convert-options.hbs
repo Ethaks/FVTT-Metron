@@ -1,0 +1,16 @@
+{{!--
+SPDX-FileCopyrightText: 2022 Ethaks <ethaks@pm.me>
+
+SPDX-License-Identifier: MIT
+--}}
+
+<form>
+  <div class="form-group">
+    <label for="{{appId}}-target-unit-system">{{localize
+        "METRON.Settings.TargetUnitSystem"
+      }}</label>
+    <select id="{{appId}}-target-unit-system" name="target">
+      {{selectOptions targetUnitSystems selected=targetUnitSystem localize=true}}
+    </select>
+  </div>
+</form>

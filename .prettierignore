@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2022 Ethaks <ethaks@pm.me>
+#
+# SPDX-License-Identifier: MIT
+
+dist
+package-lock.json
+.pnp.cjs
+.pnp.js
