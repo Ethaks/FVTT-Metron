@@ -50,8 +50,11 @@ const config = defineConfig(() => {
       sourcemap: true,
       rollupOptions: {
         output: {
-          // Relative paths start with a `../`, resulting in the `metron` missing
-          sourcemapPathTransform: (relative) => path.join("/modules/metron/metron/", relative),
+          sourcemapPathTransform: (relative) => {
+            // Relative paths start with a `../`, which moves the path out of the `modules/metron1` directory.
+            if (relative.startsWith("../")) relative = relative.replace("../", "");
+            return relative;
+          },
         },
         plugins: [terser({ mangle: { keep_classnames: true, keep_fnames: true } })],
       },
@@ -70,8 +73,6 @@ const config = defineConfig(() => {
       dir: resolve("spec"),
       include: [resolve("spec") + "/**/*.{test,spec}.{js,mjs}"],
       setupFiles: [resolve("spec/setup.mjs")],
-      // globals: true,
-      // globalSetup: resolve("spec/setup.mjs"),
     },
     plugins: [
       visualizer({
