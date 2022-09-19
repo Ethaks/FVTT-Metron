@@ -1,16 +1,16 @@
 {
   "private": true,
   "name": "metron",
-  "description": "<description of the package>",
+  "description": "Convert Foundry VTT documents from the imperial system to the metric system and vice versa.",
   "license": "MIT",
   "version": "0.0.4",
-  "homepage": "<optionally the URL to your repository or another homepage>",
+  "homepage": "https://github.com/Ethaks/FVTT-Metron",
   "repository": {
     "type": "git",
-    "url": "<optionally the URL to your repository>"
+    "url": "https://github.com/Ethaks/FVTT-Metron"
   },
   "bugs": {
-    "url": "<optionally the URL to your issues list>"
+    "url": "https://github.com/Ethaks/FVTT-Metron/issues"
   },
   "contributors": [
     {
