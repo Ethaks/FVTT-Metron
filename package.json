@@ -3,7 +3,7 @@
   "name": "metron",
   "description": "<description of the package>",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "<optionally the URL to your repository or another homepage>",
   "repository": {
     "type": "git",
