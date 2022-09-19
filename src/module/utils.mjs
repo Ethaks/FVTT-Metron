@@ -180,7 +180,7 @@ export const getUnitFromString = (string, { getMatch = false } = {}) => {
   for (const [unit, regexes] of Object.entries(unitRegexes)) {
     for (const regex of [...regexes, ...(langRegexes[unit] ?? [])]) {
       const [match] = string.match(regex) ?? [];
-      if (getMatch && match) return [unit, match];
+      if (getMatch && string.startsWith(match)) return [unit, match];
       if (match && (match === string || match === `${string}.`))
         return getMatch ? [unit, match] : unit;
     }
