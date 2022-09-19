@@ -2,10 +2,14 @@
 //
 // SPDX-License-Identifier: MIT
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
 import fc from "fast-check";
 import { convertString } from "../src/module/strings.mjs";
 import { convertDistance, UNITS } from "../src/module/utils.mjs";
+
+afterEach(() => {
+  game.i18n.lang = "en";
+});
 
 describe("convertString", function () {
   it("should convert a simple number with a unit", function () {
@@ -62,5 +66,33 @@ describe("convertString", function () {
       "1.5m. tall I am. And I weigh 75kg.",
     );
     expect(convertString("I am 5 ft.\nI weigh 150-lbs.")).to.equal("I am 1.5 m.\nI weigh 75-kg.");
+  });
+
+  it("should convert Japanese sentences", function () {
+    game.i18n.lang = "ja";
+    expect(convertString("5 ft.以内にいる目標を1体選択して1回の近接呪文攻撃を行う。")).to.equal(
+      "1.5 m.以内にいる目標を1体選択して1回の近接呪文攻撃を行う。",
+    );
+
+    // Doubled string to check successive replacements
+    expect(
+      convertString(
+        "半径20フィートの球形の範囲内にいるすべてのクリーチャー半径20フィートの球形の範囲内にいるすべてのクリーチャー",
+      ),
+    ).to.equal(
+      "半径6メートルの球形の範囲内にいるすべてのクリーチャー半径6メートルの球形の範囲内にいるすべてのクリーチャー",
+    );
+
+    expect(convertString("半径20フィートの球形の範囲内にいるすべてのクリーチャー")).to.equal(
+      "半径6メートルの球形の範囲内にいるすべてのクリーチャー",
+    );
+
+    expect(convertString("1辺15　フィートの立方体の中にいる各クリーチャー")).to.equal(
+      "1辺4.5　メートルの立方体の中にいる各クリーチャー",
+    );
+
+    expect(convertString("君の5 フィート以内にいるクリーチャー")).to.equal(
+      "君の1.5 メートル以内にいるクリーチャー",
+    );
   });
 });

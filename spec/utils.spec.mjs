@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
 import {
   convertDistance,
   convertWeight,
@@ -10,6 +10,10 @@ import {
   getUnitFromString,
   UNITS,
 } from "../src/module/utils.mjs";
+
+afterEach(() => {
+  game.i18n.lang = "en";
+});
 
 describe("getUnitFromString", function () {
   it("should recognise feet", function () {
@@ -54,7 +58,6 @@ describe("getUnitFromString", function () {
 
   it("should recognise Japanese units", function () {
     game.i18n.lang = "ja";
-    // initLanguages();
     expect(getUnitFromString("フィート")).to.equal(UNITS.FEET);
     expect(getUnitFromString("メートル")).to.equal(UNITS.METER);
     expect(getUnitFromString("マイル")).to.equal(UNITS.MILE);

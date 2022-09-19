@@ -44,11 +44,17 @@ function getType(variable) {
 }
 
 class Game {
-  translations = JSON.parse(fs.readFileSync("./public/lang/en.json", "utf8"));
+  translations = {
+    en: JSON.parse(fs.readFileSync("./public/lang/en.json", "utf8")),
+    ja: JSON.parse(fs.readFileSync("./public/lang/ja.json", "utf8")),
+  };
 
   i18n = {
+    lang: "en",
     format: (stringId, data = {}) => {
-      let str = getProperty(this.translations, stringId);
+      let str =
+        getProperty(this.translations[game.i18n.lang], stringId) ??
+        getProperty(this.translations.en, stringId);
       const fmt = /{[^}]+}/g;
       str = str.replace(fmt, (k) => {
         return data[k.slice(1, -1)];

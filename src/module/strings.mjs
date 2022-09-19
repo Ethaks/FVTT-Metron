@@ -16,9 +16,9 @@ import {
 
 // A regular expression matching strings like "1 lb" or "1.5lbs"
 const valueWithDecimalDot =
-  /([\d１２３４５６７８９０,]+\.?[\d１２３４５６７８９０]*)([\s-])?(\p{L}*)/gmu;
+  /([\d１２３４５６７８９０,]+\.?[\d１２３４５６７８９０]*)([\s-]?)(\p{L}*)/gmu;
 const valueWithDecimalComma =
-  /([\d１２３４５６７８９０.]+,?[\d１２３４５６７８９０]*)([\s-])?(\p{L}*)/gmu;
+  /([\d１２３４５６７８９０.]+,?[\d１２３４５６７８９０]*)([\s-]?)(\p{L}*)/gmu;
 
 /**
  * Converts all instances of units in a string to the other unit system,
@@ -34,7 +34,7 @@ export const convertString = (value, options = {}) => {
   return value.replaceAll(
     decimalSeparator === "dot" ? valueWithDecimalDot : valueWithDecimalComma,
     (match, number, separator, maybeUnit) => {
-      const unit = getUnitFromString(maybeUnit);
+      const [unit, unitMatch] = getUnitFromString(maybeUnit, { getMatch: true });
 
       // No unit is recognised, leave string as-is
       if (!unit) return match;
@@ -56,7 +56,10 @@ export const convertString = (value, options = {}) => {
       const localizedOtherUnit = isLongUnit
         ? localize(`UnitsLong.${getOtherUnit(unit)}`)
         : localize(`UnitsShort.${getOtherUnit(unit)}`);
-      return `${convertedValue}${separator ? separator : ""}${localizedOtherUnit}`;
+      return `${convertedValue}${separator ? separator : ""}${maybeUnit.replace(
+        unitMatch,
+        localizedOtherUnit,
+      )}`;
     },
   );
 };

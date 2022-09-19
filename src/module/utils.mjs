@@ -169,20 +169,23 @@ const unitRegexes = {
 /**
  * Determines whether a string is a unit, returning the unit if it is
  *
- * @param string
- * @returns {Unit|null}
+ * @param {string} string - The string to check
+ * @param {boolean} [getMatch=false] - Whether to return the matched unit
+ * @returns {Unit | null | [Unit | null, string?]} The unit, or null if it is not a unit; if {@link getMatch} is true, the matched unit and the matched string
  */
-export const getUnitFromString = (string) => {
+export const getUnitFromString = (string, { getMatch = false } = {}) => {
   const lang = game.i18n.lang;
   const langRegexes = languages[lang]?.unitRegexes ?? {};
 
   for (const [unit, regexes] of Object.entries(unitRegexes)) {
     for (const regex of [...regexes, ...(langRegexes[unit] ?? [])]) {
       const [match] = string.match(regex) ?? [];
-      if (match && (match === string || match === `${string}.`)) return unit;
+      if (getMatch && match) return [unit, match];
+      if (match && (match === string || match === `${string}.`))
+        return getMatch ? [unit, match] : unit;
     }
   }
-  return null;
+  return getMatch ? [null] : null;
 };
 
 /**
