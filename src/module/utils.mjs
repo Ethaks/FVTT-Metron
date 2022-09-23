@@ -111,24 +111,6 @@ export const getUnitSystem = (unit) => {
 };
 
 /**
- * Returns whether a unit is metric
- *
- * @see {@link getUnitSystem}
- * @param {Unit} unit - The unit to check
- * @returns {boolean} Whether the unit is metric
- */
-export const isMetricUnit = (unit) => getUnitSystem(unit) === "metric";
-
-/**
- * Returns whether a unit is imperial
- *
- * @see {@link getUnitSystem}
- * @param {Unit} unit
- * @returns {boolean} Whether the unit is imperial
- */
-export const isImperialUnit = (unit) => getUnitSystem(unit) === "imperial";
-
-/**
  * Returns whether a unit is a weight unit
  *
  * @param {Unit} unit
@@ -180,9 +162,7 @@ export const getUnitFromString = (string, { getMatch = false } = {}) => {
   for (const [unit, regexes] of Object.entries(unitRegexes)) {
     for (const regex of [...regexes, ...(langRegexes[unit] ?? [])]) {
       const [match] = string.match(regex) ?? [];
-      if (getMatch && string.startsWith(match)) return [unit, match];
-      if (match && (match === string || match === `${string}.`))
-        return getMatch ? [unit, match] : unit;
+      if (match && string.startsWith(match)) return getMatch ? [unit, match] : unit;
     }
   }
   return getMatch ? [null] : null;
