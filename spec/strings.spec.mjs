@@ -5,7 +5,7 @@
 import { describe, it, expect, afterEach } from "vitest";
 import fc from "fast-check";
 import { convertString } from "../src/module/strings.mjs";
-import { convertDistance, UNITS } from "../src/module/utils.mjs";
+import { convertDistance, UNIT_SYSTEMS, UNITS } from "../src/module/utils.mjs";
 
 afterEach(() => {
   game.i18n.lang = "en";
@@ -31,6 +31,13 @@ describe("convertString", function () {
     expect(convertString("5m.")).to.equal("5m.");
     expect(convertString("5 m")).to.equal("5 m");
     expect(convertString("5 m.")).to.equal("5 m.");
+  });
+
+  it("should convert metric to imperial", function () {
+    expect(convertString("1.5m", { target: UNIT_SYSTEMS.IMPERIAL })).to.equal("5ft");
+    expect(convertString("1.5m.", { target: UNIT_SYSTEMS.IMPERIAL })).to.equal("5ft.");
+    expect(convertString("1.5 m", { target: UNIT_SYSTEMS.IMPERIAL })).to.equal("5 ft");
+    expect(convertString("1.5 m.", { target: UNIT_SYSTEMS.IMPERIAL })).to.equal("5 ft.");
   });
 
   it("should convert large numbers", function () {

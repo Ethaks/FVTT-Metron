@@ -8,6 +8,8 @@ import {
   convertWeight,
   getOtherUnit,
   getUnitFromString,
+  getUnitSystem,
+  UNIT_SYSTEMS,
   UNITS,
 } from "../src/module/utils.mjs";
 
@@ -64,6 +66,30 @@ describe("getUnitFromString", function () {
     expect(getUnitFromString("キロメートル")).to.equal(UNITS.KM);
     expect(getUnitFromString("ポンド")).to.equal(UNITS.LBS);
     expect(getUnitFromString("キログラム")).to.equal(UNITS.KG);
+  });
+
+  it("should return null for non-units", function () {
+    expect(getUnitFromString("foo")).to.equal(null);
+    expect(getUnitFromString("bar")).to.equal(null);
+  });
+});
+
+describe("getUnitSystem", function () {
+  it("should recognise imperial units", function () {
+    expect(getUnitSystem(UNITS.FEET)).to.equal(UNIT_SYSTEMS.IMPERIAL);
+    expect(getUnitSystem(UNITS.MILE)).to.equal(UNIT_SYSTEMS.IMPERIAL);
+    expect(getUnitSystem(UNITS.LBS)).to.equal(UNIT_SYSTEMS.IMPERIAL);
+  });
+
+  it("should recognise metric units", function () {
+    expect(getUnitSystem(UNITS.METER)).to.equal(UNIT_SYSTEMS.METRIC);
+    expect(getUnitSystem(UNITS.KM)).to.equal(UNIT_SYSTEMS.METRIC);
+    expect(getUnitSystem(UNITS.KG)).to.equal(UNIT_SYSTEMS.METRIC);
+  });
+
+  it("should return null for unknown units", function () {
+    expect(getUnitSystem("unknown")).to.equal(null);
+    expect(getUnitSystem(123)).to.equal(null);
   });
 });
 
