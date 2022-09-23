@@ -73,6 +73,21 @@ const config = defineConfig(() => {
       dir: resolve("spec"),
       include: [resolve("spec") + "/**/*.{test,spec}.{js,mjs}"],
       setupFiles: [resolve("spec/setup.mjs")],
+      coverage: {
+        provider: "c8",
+        reporter: ["text", "html", "cobertura"],
+        all: true,
+        include: ["src/module/**/*.mjs"],
+        // Exclude all files depending on a running Foundry instance
+        exclude: [
+          "src/module/documents/**/*.mjs",
+          "src/module/applications/**/*.mjs",
+          "src/module/settings.mjs",
+          "src/module/sheets.mjs",
+          "src/module/metron.mjs",
+        ],
+        reportsDirectory: resolve("coverage"),
+      },
     },
     plugins: [
       visualizer({

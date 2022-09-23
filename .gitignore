@@ -33,3 +33,4 @@ metron.zip
 junit.xml
 /stats.html
 /src/.vitest-result.json
+/coverage/
