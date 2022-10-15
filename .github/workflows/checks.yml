@@ -64,6 +64,9 @@ jobs:
       - name: Test
         run: npm run test
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+
   build:
     runs-on: ubuntu-latest
     steps:

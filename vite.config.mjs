@@ -75,7 +75,7 @@ const config = defineConfig(() => {
       setupFiles: [resolve("spec/setup.mjs")],
       coverage: {
         provider: "c8",
-        reporter: ["text", "html", "cobertura"],
+        reporter: ["text", "html", "cobertura", "lcov"],
         all: true,
         include: ["src/module/**/*.mjs"],
         // Exclude all files depending on a running Foundry instance
