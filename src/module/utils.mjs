@@ -218,6 +218,7 @@ export const getSystemProperty = (data, path) => {
  * @typedef {object} ConversionOptions
  * @property {null | UnitSystem} [target=null] - The unit system to convert to; if null, convert to the other system;
  *   if defined, values already belonging to that system will not be converted.
+ * @property {null | UnitSystem} [current=null] - The unit system to convert from; if null, convert from the other system;
  */
 
 /**
@@ -229,6 +230,7 @@ export const getSystemProperty = (data, path) => {
 export const getConversionOptions = (options = {}) => {
   const defaults = {
     target: game.settings?.get(MODULE_ID, "targetUnitSystem") ?? "metric",
+    current: null,
   };
   return {
     ...defaults,
