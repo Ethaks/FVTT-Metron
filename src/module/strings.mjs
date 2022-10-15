@@ -7,7 +7,7 @@ import {
   convertWeight,
   getConversionOptions,
   getOtherUnit,
-  getUnitFromString,
+  getUnitMatchFromString,
   getUnitSystem,
   isWeightUnit,
   localize,
@@ -34,7 +34,7 @@ export const convertString = (value, options = {}) => {
   return value.replaceAll(
     decimalSeparator === "dot" ? valueWithDecimalDot : valueWithDecimalComma,
     (match, number, separator, maybeUnit) => {
-      const [unit, unitMatch] = getUnitFromString(maybeUnit, { getMatch: true });
+      const [unit, unitMatch] = getUnitMatchFromString(maybeUnit);
 
       // No unit is recognised, leave string as-is
       if (!unit) return match;

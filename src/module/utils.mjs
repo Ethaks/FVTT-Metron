@@ -152,21 +152,28 @@ const unitRegexes = {
  * Determines whether a string is a unit, returning the unit if it is
  *
  * @param {string} string - The string to check
- * @param {boolean} [getMatch=false] - Whether to return the matched unit
- * @returns {Unit | null | [Unit | null, string?]} The unit, or null if it is not a unit; if {@link getMatch} is true, the matched unit and the matched string
+ * @returns {[Unit | null, string?]} A tuple containing either the {@link Unit} or null, and the string as it was matched
  */
-export const getUnitFromString = (string, { getMatch = false } = {}) => {
+export const getUnitMatchFromString = (string) => {
   const lang = game.i18n.lang;
   const langRegexes = languages[lang]?.unitRegexes ?? {};
 
   for (const [unit, regexes] of Object.entries(unitRegexes)) {
     for (const regex of [...regexes, ...(langRegexes[unit] ?? [])]) {
       const [match] = string.match(regex) ?? [];
-      if (match && string.startsWith(match)) return getMatch ? [unit, match] : unit;
+      if (match && string.startsWith(match)) return [unit, match];
     }
   }
-  return getMatch ? [null] : null;
+  return [null];
 };
+
+/**
+ * Determines whether a string is a unit, returning the unit if it is
+ *
+ * @param {string} string - The string to check
+ * @returns {Unit | null} The unit, or null if the given string is not a unit
+ */
+export const getUnitFromString = (string) => getUnitMatchFromString(string)[0];
 
 /**
  * Localizes a string using Foundry's language files, prefixing the string with the module's id
