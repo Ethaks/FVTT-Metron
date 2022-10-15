@@ -10,9 +10,14 @@ import {
   getSystemProperty,
   getUnitFromString,
   getUnitSystem,
+  isEmpty,
+  MODULE_ID,
   setSystemProperty,
+  UNIT_SYSTEMS,
+  UNITS,
 } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
+import { convertTokenVisionData } from "./scene.mjs";
 
 const actorDetailFields = ["appearance", "trait", "biography.value", "ideal", "bond", "flaw"].map(
   (field) => `details.${field}`,
@@ -35,7 +40,7 @@ export const convertActorData = (actor, options = {}) => {
       ?.map((item) => {
         const itemData = item instanceof CONFIG.Item.documentClass ? item.toObject() : item;
         const itemUpdateData = convertItemData(itemData, options);
-        if (foundry.utils.isObjectEmpty(itemUpdateData)) return null;
+        if (isEmpty(itemUpdateData)) return null;
         return { _id: item._id, ...itemUpdateData };
       })
       .filter(Boolean);
@@ -52,7 +57,7 @@ export const convertActorData = (actor, options = {}) => {
   // Senses and Movement
   for (const field of ["senses", "movement"]) {
     const fieldData = getSystemProperty(actor, `attributes.${field}`);
-    if (fieldData) {
+    if (fieldData && fieldData.units) {
       const units = getUnitFromString(fieldData.units);
       if (getUnitSystem(units) !== target) {
         setSystemProperty(updateData, `attributes.${field}.units`, getOtherUnit(units));
@@ -67,6 +72,29 @@ export const convertActorData = (actor, options = {}) => {
           }
         }
       }
+    }
+  }
+
+  // Prototype token
+  const prototypeToken = game.release.generation < 10 ? actor.token : actor.prototypeToken;
+  if (prototypeToken) {
+    const movementUnits = getSystemProperty(actor, "attributes.movement.units");
+    const sensesUnits = getSystemProperty(actor, "attributes.senses.units");
+    const inferredUnitSystem = getUnitSystem(getUnitFromString(movementUnits ?? sensesUnits));
+
+    const currentUnitSystem =
+      actor.flags[MODULE_ID]?.unitSystem ?? inferredUnitSystem ?? UNIT_SYSTEMS.IMPERIAL;
+    const tokenUpdateData = convertTokenVisionData(prototypeToken, {
+      current: currentUnitSystem === UNIT_SYSTEMS.IMPERIAL ? UNITS.FEET : UNITS.METER,
+      ...options,
+    });
+    if (!isEmpty(tokenUpdateData)) {
+      if (game.release.generation < 10) {
+        updateData.token = tokenUpdateData;
+      } else {
+        updateData.prototypeToken = tokenUpdateData;
+      }
+      foundry.utils.setProperty(updateData, `flags.${MODULE_ID}.unitSystem`, target);
     }
   }
 

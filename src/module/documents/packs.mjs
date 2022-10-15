@@ -5,7 +5,7 @@
 import { convertActorData } from "./actor.mjs";
 import { convertItemData } from "./item.mjs";
 import { convertSceneData } from "./scene.mjs";
-import { getConversionOptions } from "../utils.mjs";
+import { getConversionOptions, isEmpty } from "../utils.mjs";
 import { convertJournalEntryData } from "./journal.mjs";
 
 /**
@@ -44,7 +44,7 @@ export const convertPack = async (pack, options) => {
         break;
     }
 
-    if (foundry.utils.isObjectEmpty(updateData)) continue;
+    if (isEmpty(updateData)) continue;
     updates.push({ _id: document.id, ...updateData });
   }
 

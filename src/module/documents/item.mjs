@@ -41,7 +41,7 @@ export const convertItemData = (data, options = {}) => {
 
   // Ability range
   if (systemData.range) {
-    const units = getUnitFromString(systemData.range.units);
+    const units = getUnitFromString(systemData.range.units ?? "");
     // Only handle metric/imperial units, not touch etc.
     if (units) {
       setSystemProperty(updateData, "range.units", getOtherUnit(units));
@@ -52,7 +52,7 @@ export const convertItemData = (data, options = {}) => {
 
   // Target data
   if (systemData.target) {
-    const units = getUnitFromString(systemData.target.units);
+    const units = getUnitFromString(systemData.target.units ?? "");
     // Only handle metric/imperial units, not touch etc.
     if (units) {
       setSystemProperty(updateData, "target.units", getOtherUnit(units));
