@@ -237,3 +237,14 @@ export const getConversionOptions = (options = {}) => {
     ...options,
   };
 };
+
+/**
+ * Checks whether an object is empty
+ *
+ * @see {@link foundry.utils.isEmpty}
+ * @see {@link foundry.utils.isObjectEmpty}
+ * @param {object|[]} obj - The object to check
+ * @returns {boolean} Whether the object is empty
+ */
+export const isEmpty = (obj) =>
+  game.release.generation > 9 ? foundry.utils.isEmpty(obj) : foundry.utils.isObjectEmpty(obj);
