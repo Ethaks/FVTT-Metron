@@ -4,7 +4,27 @@ SPDX-FileCopyrightText: 2022 Ethaks
 SPDX-License-Identifier: MIT
 -->
 
-# Metron
+<h1 style="text-align: center" align="center">
+  Metron
+</h1>
+
+<p style="text-align: center" align="center">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/Ethaks/FVTT-Metron/Checks?label=Checks&logo=github">
+  <a href="https://github.com/Ethaks/FVTT-Metron/releases/latest">
+    <img src="https://img.shields.io/github/downloads/Ethaks/FVTT-Metron/latest/module.zip" alt="Downloads" />
+  </a>
+  <a href="https://forge-vtt.com/bazaar#package=metron">
+    <img src="https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fmetron&colorB=4aa94a" alt="Forge Install %" />
+  </a>
+  <br />
+  <a href="https://www.foundryvtt-hub.com/package/metron/">
+    <img src="https://img.shields.io/endpoint?logoColor=white&url=https%3A%2F%2Fwww.foundryvtt-hub.com%2Fwp-json%2Fhubapi%2Fv1%2Fpackage%2Fmetron%2Fshield%2Fendorsements" alt="Foundry Hub Endorsements" />
+  </a>
+  <img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/Ethaks/FVTT-Metron/releases/latest/download/module.json" alt="Supported Foundry Versions" />
+<a href="https://codecov.io/gh/Ethaks/FVTT-Metron" >
+ <img src="https://codecov.io/gh/Ethaks/FVTT-Metron/branch/main/graph/badge.svg?token=IOKNVR240G" alt="Coverage %"/>
+ </a>
+</p>
 
 Metron is a dnd5e-specific module converting actors, items, their descriptions and text fields, as well as scenes and journal entries from imperial to metric units.
 
