@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.4...v0.0.5) (2022-10-16)
+
+
+### Features
+
+* convert lights and token sight data in scenes ([f06b1a2](https://github.com/Ethaks/FVTT-Metron/commit/f06b1a2c8fe31bced6e136387e88011ac9f2ec12))
+
 ### [0.0.4](///compare/v0.0.3...v0.0.4) (2022-09-19)
 
 
