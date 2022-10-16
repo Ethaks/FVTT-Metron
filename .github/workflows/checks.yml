@@ -62,7 +62,7 @@ jobs:
         run: npm ci --cache .npm --prefer-offline
 
       - name: Test
-        run: npm run test
+        run: npm run test:coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
