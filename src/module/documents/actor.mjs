@@ -19,9 +19,21 @@ import {
 import { convertString } from "../strings.mjs";
 import { convertTokenVisionData } from "./scene.mjs";
 
+/**
+ * An array of dot separated paths to string properties that should be converted for normal actors.
+ *
+ * @type {string[]}
+ */
 const actorDetailFields = ["appearance", "trait", "biography.value", "ideal", "bond", "flaw"].map(
   (field) => `details.${field}`,
 );
+
+/**
+ * An array of dot separated paths to string properties that should be converted for party sheets.
+ *
+ * @type {string[]}
+ */
+const partyDataFields = ["description.full"];
 
 /**
  * Converts all data belonging to an actor to the other unit system.
@@ -45,7 +57,7 @@ export const convertActorData = (actor, options = {}) => {
   }
 
   // Text fields
-  for (const field of actorDetailFields) {
+  for (const field of [...actorDetailFields, ...partyDataFields]) {
     const value = getSystemProperty(actor, field);
     if (!value) continue;
     const convertedString = convertString(value, options);
@@ -78,21 +90,23 @@ export const convertActorData = (actor, options = {}) => {
   if (prototypeToken) {
     const movementUnits = getSystemProperty(actor, "attributes.movement.units");
     const sensesUnits = getSystemProperty(actor, "attributes.senses.units");
-    const inferredUnitSystem = getUnitSystem(getUnitFromString(movementUnits ?? sensesUnits));
+    if (movementUnits || sensesUnits) {
+      const inferredUnitSystem = getUnitSystem(getUnitFromString(movementUnits ?? sensesUnits));
 
-    const currentUnitSystem =
-      actor.flags[MODULE_ID]?.unitSystem ?? inferredUnitSystem ?? UNIT_SYSTEMS.IMPERIAL;
-    const tokenUpdateData = convertTokenVisionData(prototypeToken, {
-      current: currentUnitSystem === UNIT_SYSTEMS.IMPERIAL ? UNITS.FEET : UNITS.METER,
-      ...options,
-    });
-    if (!isEmpty(tokenUpdateData)) {
-      if (game.release.generation < 10) {
-        updateData.token = tokenUpdateData;
-      } else {
-        updateData.prototypeToken = tokenUpdateData;
+      const currentUnitSystem =
+        actor.flags[MODULE_ID]?.unitSystem ?? inferredUnitSystem ?? UNIT_SYSTEMS.IMPERIAL;
+      const tokenUpdateData = convertTokenVisionData(prototypeToken, {
+        current: currentUnitSystem === UNIT_SYSTEMS.IMPERIAL ? UNITS.FEET : UNITS.METER,
+        ...options,
+      });
+      if (!isEmpty(tokenUpdateData)) {
+        if (game.release.generation < 10) {
+          updateData.token = tokenUpdateData;
+        } else {
+          updateData.prototypeToken = tokenUpdateData;
+        }
+        foundry.utils.setProperty(updateData, `flags.${MODULE_ID}.unitSystem`, target);
       }
-      foundry.utils.setProperty(updateData, `flags.${MODULE_ID}.unitSystem`, target);
     }
   }
 
