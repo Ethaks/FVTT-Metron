@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.5...v0.0.6) (2023-01-19)
+
+
+### Bug Fixes
+
+* prevent conversion of unlinked tokens from deleting items ([9d9e7a7](https://github.com/Ethaks/FVTT-Metron/commit/9d9e7a7104e156aeca24b1959931cbcb3ab2c47c))
+
 ### [0.0.5](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.4...v0.0.5) (2022-10-16)
 
 
