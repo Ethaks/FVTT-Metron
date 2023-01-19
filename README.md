@@ -5,7 +5,7 @@ SPDX-License-Identifier: MIT
 -->
 
 <h1 style="text-align: center" align="center">
-  Metron
+  Metron 📐
 </h1>
 
 <p style="text-align: center" align="center">
