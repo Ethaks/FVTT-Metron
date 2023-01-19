@@ -2,7 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-import * as languages from "./languages/languages.mjs";
+import { languages } from "./languages/languages.mjs";
+import { applyExactMatchRequirement } from "./languages/utils.mjs";
 
 /** The module's id/name */
 export const MODULE_ID = "metron";
@@ -147,6 +148,8 @@ const unitRegexes = {
   km: [/kms?/, /kilometers?/, /kilometres?/],
   m: [/m/, /meters?/, /metres?/],
 };
+// Require exact matches for English unit strings
+applyExactMatchRequirement(unitRegexes);
 
 /**
  * Determines whether a string is a unit, returning the unit if it is
@@ -156,10 +159,11 @@ const unitRegexes = {
  */
 export const getUnitMatchFromString = (string) => {
   const lang = game.i18n.lang;
-  const langRegexes = languages[lang]?.unitRegexes ?? {};
+  const { unitRegexes: langRegexes = {} } = languages[lang] ?? {};
 
   for (const [unit, regexes] of Object.entries(unitRegexes)) {
-    for (const regex of [...regexes, ...(langRegexes[unit] ?? [])]) {
+    const langUnitRegexes = langRegexes[unit] ?? [];
+    for (const regex of [...regexes, ...langUnitRegexes]) {
       const [match] = string.match(regex) ?? [];
       if (match && string.startsWith(match)) return [unit, match];
     }

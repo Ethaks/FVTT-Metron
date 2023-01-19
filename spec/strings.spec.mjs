@@ -75,6 +75,12 @@ describe("convertString", function () {
     expect(convertString("I am 5 ft.\nI weigh 150-lbs.")).to.equal("I am 1.5 m.\nI weigh 75-kg.");
   });
 
+  it("should convert multiple unit numbers, but leave non-unit numbers", function () {
+    expect(convertString("I can run 10 miles and 50ft in 60 minutes.")).to.equal(
+      "I can run 15 kilometers and 15m in 60 minutes.",
+    );
+  });
+
   it("should convert Japanese sentences", function () {
     game.i18n.lang = "ja";
     expect(convertString("5 ft.以内にいる目標を1体選択して1回の近接呪文攻撃を行う。")).to.equal(

@@ -9,6 +9,7 @@ import {
   getOtherUnit,
   getUnitFromString,
   getUnitSystem,
+  setSystemProperty,
   UNIT_SYSTEMS,
   UNITS,
 } from "../src/module/utils.mjs";
@@ -71,6 +72,9 @@ describe("getUnitFromString", function () {
   it("should return null for non-units", function () {
     expect(getUnitFromString("foo")).to.equal(null);
     expect(getUnitFromString("bar")).to.equal(null);
+    expect(getUnitFromString("minute")).to.equal(null);
+    expect(getUnitFromString("minutes")).to.equal(null);
+    expect(getUnitFromString("hour")).to.equal(null);
   });
 });
 
@@ -146,5 +150,26 @@ describe("getOtherUnit", function () {
     expect(getOtherUnit(UNITS.METER)).to.equal(UNITS.FEET);
     expect(getOtherUnit(UNITS.KM)).to.equal(UNITS.MILE);
     expect(getOtherUnit(UNITS.KG)).to.equal(UNITS.LBS);
+  });
+});
+
+describe("setSystemProperty", function () {
+  it("should set the system property in v9", function () {
+    game.release.generation = 9;
+    const data = {};
+    setSystemProperty(data, "foo.bar", "baz");
+    expect(data.data.foo.bar).to.equal("baz");
+  });
+  it("should set the system property in v10", function () {
+    game.release.generation = 10;
+    const data = {};
+    setSystemProperty(data, "foo.bar", "baz");
+    expect(data.system.foo.bar).to.equal("baz");
+  });
+  it("should set the system property in v11", function () {
+    game.release.generation = 11;
+    const data = {};
+    setSystemProperty(data, "foo.bar", "baz");
+    expect(data.system.foo.bar).to.equal("baz");
   });
 });

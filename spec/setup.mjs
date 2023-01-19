@@ -16,6 +16,30 @@ function getProperty(object, key) {
   return target;
 }
 
+function setProperty(object, key, value) {
+  let target = object;
+  let changed = false;
+
+  // Convert the key to an object reference if it contains dot notation
+  if (key.indexOf(".") !== -1) {
+    let parts = key.split(".");
+    key = parts.pop();
+    target = parts.reduce((o, i) => {
+      if (!Object.hasOwn(o, i)) o[i] = {};
+      return o[i];
+    }, object);
+  }
+
+  // Update the target
+  if (target[key] !== value) {
+    changed = true;
+    target[key] = value;
+  }
+
+  // Return changed status
+  return changed;
+}
+
 function getType(variable) {
   // Primitive types, handled with simple typeof check
   const typeOf = typeof variable;
@@ -44,6 +68,7 @@ function getType(variable) {
 }
 
 class Game {
+  release = { generation: 10 };
   translations = {
     en: JSON.parse(fs.readFileSync("./public/lang/en.json", "utf8")),
     ja: JSON.parse(fs.readFileSync("./public/lang/ja.json", "utf8")),
@@ -66,5 +91,11 @@ class Game {
 
 export default function setup() {
   globalThis.game = new Game();
+  globalThis.foundry = {
+    utils: {
+      getProperty,
+      setProperty,
+    },
+  };
 }
 setup();

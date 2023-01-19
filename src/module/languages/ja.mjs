@@ -2,11 +2,17 @@
 //
 // SPDX-License-Identifier: MIT
 
-export const unitRegexes = {
-  lbs: [/ポンド/u],
-  kg: [/キログラム/u],
-  ft: [/フィート/u],
-  m: [/メートル/u],
-  mi: [/マイル/u],
-  km: [/キロメートル/u],
+/** @type {LanguageModule} */
+const languageModule = {
+  unitRegexes: {
+    lbs: [/ポンド/u],
+    kg: [/キログラム/u],
+    ft: [/フィート/u],
+    m: [/メートル/u],
+    mi: [/マイル/u],
+    km: [/キロメートル/u],
+  },
+  requireExactMatch: false,
 };
+
+export default languageModule;
