@@ -36,14 +36,12 @@ export const convertActorData = (actor, options = {}) => {
 
   // Items
   if (actor.items) {
-    updateData.items = actor.items
-      ?.map((item) => {
-        const itemData = item instanceof CONFIG.Item.documentClass ? item.toObject() : item;
-        const itemUpdateData = convertItemData(itemData, options);
-        if (isEmpty(itemUpdateData)) return null;
-        return { _id: item._id, ...itemUpdateData };
-      })
-      .filter(Boolean);
+    updateData.items = actor.items?.map((item) => {
+      const itemData = item instanceof CONFIG.Item.documentClass ? item.toObject() : item;
+      const itemUpdateData = convertItemData(itemData, options);
+      if (isEmpty(itemUpdateData)) return itemData;
+      return foundry.utils.mergeObject(itemData, itemUpdateData);
+    });
   }
 
   // Text fields
