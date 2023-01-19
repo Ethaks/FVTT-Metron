@@ -8,7 +8,7 @@
  */
 
 // Import JavaScript modules
-import { registerSettings } from "./settings.mjs";
+import * as settings from "./settings.mjs";
 import * as item from "./documents/item.mjs";
 import * as actor from "./documents/actor.mjs";
 import * as scene from "./documents/scene.mjs";
@@ -37,7 +37,7 @@ Hooks.once("init", async () => {
   console.log(`${utils.MODULE_ID} | Initializing metron`);
 
   // Register custom module settings
-  registerSettings();
+  settings.registerSettings();
 
   CONFIG.compatibility?.excludePatterns?.push(/metron/);
 });
@@ -45,6 +45,12 @@ Hooks.once("init", async () => {
 Hooks.once("setup", () => {
   const moduleData = game.modules.get(utils.MODULE_ID);
   foundry.utils.setProperty(moduleData, "api", metron);
+
+  // Override the system's default weight conversion rate with simplified one
+  const overrideWeightConversion = game.settings.get(utils.MODULE_ID, "overrideWeightConversion");
+  if (overrideWeightConversion) {
+    settings.applyWeightConversionOverride(overrideWeightConversion);
+  }
 });
 
 Hooks.once("ready", () => {

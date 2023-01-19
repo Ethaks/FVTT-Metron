@@ -45,4 +45,24 @@ export const registerSettings = () => {
     config: true,
     type: String,
   });
+
+  game.settings.register(MODULE_ID, "overrideWeightConversion", {
+    name: "METRON.Settings.OverrideWeightConversion",
+    hint: "METRON.Settings.OverrideWeightConversionHint",
+    default: false,
+    scope: "world",
+    config: true,
+    type: Boolean,
+    onChange: applyWeightConversionOverride,
+  });
+};
+
+export const applyWeightConversionOverride = (simplified = false) => {
+  if (simplified) {
+    CONFIG.DND5E.encumbrance.strMultiplier.metric = 7.5;
+    CONFIG.DND5E.encumbrance.currencyPerWeight.metric = 100;
+  } else {
+    CONFIG.DND5E.encumbrance.strMultiplier.metric = 6.8;
+    CONFIG.DND5E.encumbrance.currencyPerWeight.metric = 110;
+  }
 };
