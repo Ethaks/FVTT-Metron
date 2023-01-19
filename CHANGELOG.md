@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.6...v0.1.0) (2023-01-19)
+
+
+### Features
+
+* add conversion of party descriptions and fix their item conversion ([a219720](https://github.com/Ethaks/FVTT-Metron/commit/a219720b4f0b91c038bc1666eaa08baff87c21de))
+* add setting to override system weight conversion for encumbrance ([bc283af](https://github.com/Ethaks/FVTT-Metron/commit/bc283afe76f59d297bb3f366f7045e99356d687c))
+
 ### [0.0.6](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.5...v0.0.6) (2023-01-19)
 
 
