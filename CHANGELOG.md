@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/Ethaks/FVTT-Metron/compare/v0.1.0...v0.1.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* prevent minutes from being recognised as distance units ([e8d9fa4](https://github.com/Ethaks/FVTT-Metron/commit/e8d9fa419bd4403a99f1f8feba6f82b4abb7df66)), closes [#1](https://github.com/Ethaks/FVTT-Metron/issues/1)
+
 ## [0.1.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.0.6...v0.1.0) (2023-01-19)
 
 
