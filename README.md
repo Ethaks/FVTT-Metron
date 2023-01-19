@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 </h1>
 
 <p style="text-align: center" align="center">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/Ethaks/FVTT-Metron/Checks?label=Checks&logo=github">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Ethaks/FVTT-Metron/checks.yml?branch=main&label=Checks&logo=github">
   <a href="https://github.com/Ethaks/FVTT-Metron/releases/latest">
     <img src="https://img.shields.io/github/downloads/Ethaks/FVTT-Metron/latest/module.zip" alt="Downloads" />
   </a>
