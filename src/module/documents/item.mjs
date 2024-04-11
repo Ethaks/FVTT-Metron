@@ -8,8 +8,8 @@ import {
   getConversionOptions,
   getOtherUnit,
   getUnitFromString,
+  getUnitSystem,
   MODULE_ID,
-  setSystemProperty,
 } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
 
@@ -19,23 +19,41 @@ import { convertString } from "../strings.mjs";
  * @param {ConversionOptions} [options] - Options for conversion
  */
 export const convertItemData = (data, options = {}) => {
-  const updateData = {};
+  const updateData = { system: {} };
   const { target } = getConversionOptions(options);
 
-  // If the item has a weight, convert it to the other system
   const systemData = data.system ?? data.data;
-  if (systemData.weight != null) {
-    /** @type {UnitSystem} */
-    const currentUnitSystem = data.flags[MODULE_ID]?.unitSystem ?? "imperial";
-    if (!(target !== null && currentUnitSystem === target)) {
-      /** @type {WeightUnit} */
-      const currentUnits = currentUnitSystem === "imperial" ? "lbs" : "kg";
-      setSystemProperty(updateData, "weight", convertWeight(systemData.weight, currentUnits));
-      foundry.utils.setProperty(
-        updateData,
-        `flags.${MODULE_ID}.unitSystem`,
-        currentUnitSystem === "imperial" ? "metric" : "imperial",
-      );
+  /** @type {UnitSystem} */
+  const currentUnitSystem = data.flags[MODULE_ID]?.unitSystem ?? "imperial";
+  if (!(target !== null && currentUnitSystem === target)) {
+    /** @type {WeightUnit} */
+    const currentUnits = currentUnitSystem === "imperial" ? "lbs" : "kg";
+    foundry.utils.setProperty(
+      updateData,
+      `flags.${MODULE_ID}.unitSystem`,
+      currentUnitSystem === "imperial" ? "metric" : "imperial",
+    );
+
+    // Race
+    if (data.type === "race") {
+      for (const field of ["senses", "movement"]) {
+        if (!systemData[field] || !systemData[field].units) continue;
+        const units = getUnitFromString(systemData[field].units ?? "");
+        if (getUnitSystem(units) === target) continue;
+        updateData.system[field] ??= {};
+        updateData.system[field].units = getOtherUnit(units);
+        for (const key of Object.keys(systemData[field])) {
+          if (typeof systemData[field][key] === "number") {
+            updateData.system[field][key] = convertDistance(systemData[field][key], units);
+          }
+        }
+      }
+    }
+
+    // If the item has a weight, convert it to the other system
+    // TODO: Repeatedly converting item without weight
+    if (systemData.weight != null) {
+      updateData.weight = convertWeight(systemData.weight, currentUnits);
     }
   }
 
@@ -43,10 +61,12 @@ export const convertItemData = (data, options = {}) => {
   if (systemData.range) {
     const units = getUnitFromString(systemData.range.units ?? "");
     // Only handle metric/imperial units, not touch etc.
-    if (units) {
-      setSystemProperty(updateData, "range.units", getOtherUnit(units));
-      setSystemProperty(updateData, "range.value", convertDistance(systemData.range.value, units));
-      setSystemProperty(updateData, "range.long", convertDistance(systemData.range.long, units));
+    if (units && getUnitSystem(units) !== target) {
+      updateData.system.range = {
+        units: getOtherUnit(units),
+        value: convertDistance(systemData.range.value, units),
+        long: convertDistance(systemData.range.long, units),
+      };
     }
   }
 
@@ -54,13 +74,11 @@ export const convertItemData = (data, options = {}) => {
   if (systemData.target) {
     const units = getUnitFromString(systemData.target.units ?? "");
     // Only handle metric/imperial units, not touch etc.
-    if (units) {
-      setSystemProperty(updateData, "target.units", getOtherUnit(units));
-      setSystemProperty(
-        updateData,
-        "target.value",
-        convertDistance(systemData.target.value, units),
-      );
+    if (units && getUnitSystem(units) !== target) {
+      updateData.system.target = {
+        units: getOtherUnit(units),
+        value: convertDistance(systemData.target.value, units),
+      };
     }
   }
 
@@ -70,8 +88,7 @@ export const convertItemData = (data, options = {}) => {
       const value = systemData.description[field];
       if (!value) continue;
       const convertedString = convertString(value, options);
-      if (convertedString !== value)
-        setSystemProperty(updateData, `description.${field}`, convertedString);
+      if (convertedString !== value) updateData.system[`description.${field}`] = convertedString;
     }
   }
 

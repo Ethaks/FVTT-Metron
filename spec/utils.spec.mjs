@@ -9,7 +9,6 @@ import {
   getOtherUnit,
   getUnitFromString,
   getUnitSystem,
-  setSystemProperty,
   UNIT_SYSTEMS,
   UNITS,
 } from "../src/module/utils.mjs";
@@ -62,10 +61,13 @@ describe("getUnitFromString", function () {
   it("should recognise Japanese units", function () {
     game.i18n.lang = "ja";
     expect(getUnitFromString("フィート")).to.equal(UNITS.FEET);
+    expect(getUnitFromString("㌳")).to.equal(UNITS.FEET);
     expect(getUnitFromString("メートル")).to.equal(UNITS.METER);
     expect(getUnitFromString("マイル")).to.equal(UNITS.MILE);
+    expect(getUnitFromString("㍄")).to.equal(UNITS.MILE);
     expect(getUnitFromString("キロメートル")).to.equal(UNITS.KM);
     expect(getUnitFromString("ポンド")).to.equal(UNITS.LBS);
+    expect(getUnitFromString("㍀")).to.equal(UNITS.LBS);
     expect(getUnitFromString("キログラム")).to.equal(UNITS.KG);
   });
 
@@ -150,26 +152,5 @@ describe("getOtherUnit", function () {
     expect(getOtherUnit(UNITS.METER)).to.equal(UNITS.FEET);
     expect(getOtherUnit(UNITS.KM)).to.equal(UNITS.MILE);
     expect(getOtherUnit(UNITS.KG)).to.equal(UNITS.LBS);
-  });
-});
-
-describe("setSystemProperty", function () {
-  it("should set the system property in v9", function () {
-    game.release.generation = 9;
-    const data = {};
-    setSystemProperty(data, "foo.bar", "baz");
-    expect(data.data.foo.bar).to.equal("baz");
-  });
-  it("should set the system property in v10", function () {
-    game.release.generation = 10;
-    const data = {};
-    setSystemProperty(data, "foo.bar", "baz");
-    expect(data.system.foo.bar).to.equal("baz");
-  });
-  it("should set the system property in v11", function () {
-    game.release.generation = 11;
-    const data = {};
-    setSystemProperty(data, "foo.bar", "baz");
-    expect(data.system.foo.bar).to.equal("baz");
   });
 });

@@ -7,12 +7,9 @@ import {
   convertDistance,
   getConversionOptions,
   getOtherUnit,
-  getSystemProperty,
   getUnitFromString,
   getUnitSystem,
-  isEmpty,
   MODULE_ID,
-  setSystemProperty,
   UNIT_SYSTEMS,
   UNITS,
 } from "../utils.mjs";
@@ -43,7 +40,7 @@ const partyDataFields = ["description.full"];
  * @returns {object} The update data
  */
 export const convertActorData = (actor, options = {}) => {
-  const updateData = {};
+  const updateData = { system: {} };
   const { target } = getConversionOptions(options);
 
   // Items
@@ -51,34 +48,35 @@ export const convertActorData = (actor, options = {}) => {
     updateData.items = actor.items?.map((item) => {
       const itemData = item instanceof CONFIG.Item.documentClass ? item.toObject() : item;
       const itemUpdateData = convertItemData(itemData, options);
-      if (isEmpty(itemUpdateData)) return itemData;
+      if (foundry.utils.isEmpty(itemUpdateData)) return itemData;
       return foundry.utils.mergeObject(itemData, itemUpdateData);
     });
   }
 
   // Text fields
   for (const field of [...actorDetailFields, ...partyDataFields]) {
-    const value = getSystemProperty(actor, field);
+    const value = foundry.utils.getProperty(actor.system, field);
     if (!value) continue;
     const convertedString = convertString(value, options);
-    if (convertedString !== value) setSystemProperty(updateData, field, convertedString);
+    if (convertedString !== value) updateData.system[field] = convertedString;
   }
 
-  // Senses and Movement
-  for (const field of ["senses", "movement"]) {
-    const fieldData = getSystemProperty(actor, `attributes.${field}`);
-    if (fieldData && fieldData.units) {
-      const units = getUnitFromString(fieldData.units);
-      if (getUnitSystem(units) !== target) {
-        setSystemProperty(updateData, `attributes.${field}.units`, getOtherUnit(units));
-        const dataFields = Object.keys(fieldData);
-        for (const dataField of dataFields) {
-          if (fieldData[dataField] && typeof fieldData[dataField] === "number") {
-            setSystemProperty(
-              updateData,
-              `attributes.${field}.${dataField}`,
-              convertDistance(fieldData[dataField], units),
-            );
+  // Senses and Movement (if not set by race)
+  if (!actor.items.some((i) => i.type === "race")) {
+    for (const field of ["senses", "movement"]) {
+      const fieldData = actor.system?.attributes?.[field];
+      if (fieldData && fieldData.units) {
+        const units = getUnitFromString(fieldData.units);
+        if (getUnitSystem(units) !== target) {
+          updateData.system[`attributes.${field}.units`] = getOtherUnit(units);
+          const dataFields = Object.keys(fieldData);
+          for (const dataField of dataFields) {
+            if (fieldData[dataField] && typeof fieldData[dataField] === "number") {
+              updateData.system[`attributes.${field}.${dataField}`] = convertDistance(
+                fieldData[dataField],
+                units,
+              );
+            }
           }
         }
       }
@@ -86,10 +84,10 @@ export const convertActorData = (actor, options = {}) => {
   }
 
   // Prototype token
-  const prototypeToken = game.release.generation < 10 ? actor.token : actor.prototypeToken;
+  const prototypeToken = actor.prototypeToken;
   if (prototypeToken) {
-    const movementUnits = getSystemProperty(actor, "attributes.movement.units");
-    const sensesUnits = getSystemProperty(actor, "attributes.senses.units");
+    const movementUnits = actor.system.attributes.movement.units;
+    const sensesUnits = actor.system.attributes.senses.units;
     if (movementUnits || sensesUnits) {
       const inferredUnitSystem = getUnitSystem(getUnitFromString(movementUnits ?? sensesUnits));
 
@@ -99,12 +97,8 @@ export const convertActorData = (actor, options = {}) => {
         current: currentUnitSystem === UNIT_SYSTEMS.IMPERIAL ? UNITS.FEET : UNITS.METER,
         ...options,
       });
-      if (!isEmpty(tokenUpdateData)) {
-        if (game.release.generation < 10) {
-          updateData.token = tokenUpdateData;
-        } else {
-          updateData.prototypeToken = tokenUpdateData;
-        }
+      if (!foundry.utils.isEmpty(tokenUpdateData)) {
+        updateData.prototypeToken = tokenUpdateData;
         foundry.utils.setProperty(updateData, `flags.${MODULE_ID}.unitSystem`, target);
       }
     }

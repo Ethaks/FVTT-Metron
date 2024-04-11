@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-import { getConversionOptions, isEmpty } from "../utils.mjs";
+import { getConversionOptions } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
 
 /**
@@ -37,7 +37,7 @@ export const convertJournalEntryData = (journalEntry, options = {}) => {
             if (convertedString !== pageData.text.content)
               foundry.utils.setProperty(pageUpdateData, "text.content", convertedString);
           }
-          if (isEmpty(pageUpdateData)) return null;
+          if (foundry.utils.isEmpty(pageUpdateData)) return null;
           return { _id: page._id, ...pageUpdateData };
         })
         .filter(Boolean);

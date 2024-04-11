@@ -8,7 +8,6 @@ import {
   getOtherUnit,
   getUnitFromString,
   getUnitSystem,
-  isEmpty,
   UNITS,
 } from "../utils.mjs";
 import { convertActorData } from "./actor.mjs";
@@ -26,20 +25,13 @@ export const convertSceneData = (scene, options = {}) => {
   const { target } = getConversionOptions(options);
 
   // Convert grid distance and units if necessary
-  const currentGridUnits = scene.grid?.units ?? scene.gridUnits;
-  const currentGridDistance = scene.grid?.distance ?? scene.gridDistance;
-  const units = getUnitFromString(currentGridUnits);
+  const units = getUnitFromString(scene.grid.units);
   const currentSystem = getUnitSystem(units);
   if (units && currentSystem !== target) {
-    if (game.release.generation < 10) {
-      sceneUpdateData.gridUnits = getOtherUnit(units);
-      sceneUpdateData.gridDistance = convertDistance(currentGridDistance, units);
-    } else {
-      sceneUpdateData.grid = {
-        units: getOtherUnit(units),
-        distance: convertDistance(scene.grid.distance, units),
-      };
-    }
+    sceneUpdateData.grid = {
+      units: getOtherUnit(units),
+      distance: convertDistance(scene.grid.distance, units),
+    };
   }
 
   const sceneTokens = Array.isArray(scene.tokens) ? scene.tokens : scene.tokens.contents;
@@ -49,7 +41,7 @@ export const convertSceneData = (scene, options = {}) => {
     const tokenVisionData =
       convertTokenVisionData(tokenData, { target: target, current: units }) ?? {};
     const updateData = { ...tokenActorData, ...tokenVisionData };
-    if (!isEmpty(updateData)) {
+    if (!foundry.utils.isEmpty(updateData)) {
       return [{ _id: tokenData._id, ...updateData }];
     } else {
       return [];
@@ -59,7 +51,7 @@ export const convertSceneData = (scene, options = {}) => {
   const sceneLights = Array.isArray(scene.lights) ? scene.lights : scene.lights.contents;
   const lights = sceneLights.flatMap((light) => {
     const updateData = convertLightData(light, { target, current: units });
-    if (!isEmpty(updateData)) {
+    if (!foundry.utils.isEmpty(updateData)) {
       return [{ _id: light._id, ...updateData }];
     } else {
       return [];
@@ -79,12 +71,12 @@ export const convertSceneData = (scene, options = {}) => {
  */
 const convertTokenActorData = (tokenData, options = {}) => {
   if (!tokenData.actorId || tokenData.actorLink) {
-    tokenData.actorData = {};
+    tokenData.delta = {};
   } else if (!game.actors.has(tokenData.actorId)) {
     tokenData.actorId = null;
-    tokenData.actorData = {};
+    tokenData.delta = {};
   } else if (!tokenData.actorLink) {
-    const actorData = tokenData.actorData;
+    const actorData = tokenData.delta;
     const actorUpdate = convertActorData(actorData, options);
 
     // Handle item updates
@@ -96,9 +88,9 @@ const convertTokenActorData = (tokenData, options = {}) => {
       });
       delete actorUpdate.items;
     }
-    foundry.utils.mergeObject(tokenData.actorData, actorUpdate);
+    foundry.utils.mergeObject(tokenData.delta, actorUpdate);
   }
-  return isEmpty(tokenData.actorData) ? {} : { actorData: tokenData.actorData };
+  return foundry.utils.isEmpty(tokenData.delta) ? {} : { actorData: tokenData.delta };
 };
 
 /**
@@ -112,21 +104,15 @@ export const convertTokenVisionData = (tokenData, options = {}) => {
   const { target, current = UNITS.FEET } = options;
   const currentUnitSystem = getUnitSystem(current);
   if (target === currentUnitSystem) return {};
-  if (game.release.generation < 10) {
-    const { dimSight, brightSight } = tokenData;
-    const updateData = {};
-    if (dimSight) updateData.dimSight = convertDistance(dimSight, current);
-    if (brightSight) updateData.brightSight = convertDistance(brightSight, current);
-    return updateData;
-  } else {
-    const sight = tokenData.sight;
-    if (!sight) return {};
-    const { range } = sight;
-    if (range) {
-      sight.range = convertDistance(range, current);
-    }
-    return { sight };
+
+  const sight = tokenData.sight;
+  if (!sight) return {};
+  const { range } = sight;
+  if (range) {
+    sight.range = convertDistance(range, current);
   }
+
+  return { sight };
 };
 
 /**

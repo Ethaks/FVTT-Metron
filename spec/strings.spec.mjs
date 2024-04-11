@@ -79,6 +79,21 @@ describe("convertString", function () {
     expect(convertString("I can run 10 miles and 50ft in 60 minutes.")).to.equal(
       "I can run 15 kilometers and 15m in 60 minutes.",
     );
+    expect(
+      convertString(
+        "The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.",
+      ),
+    ).to.equal(
+      "The target beast travels for the duration of the spell toward the specified location, covering about 75 kilometers per 24 hours for a flying messenger, or 37.5 kilometers for other animals.",
+    );
+    expect(
+      convertString(
+        "The target beast travels for the duration of the spell toward the specified location, covering about 75 kilometers per 24 hours for a flying messenger, or 37.5 kilometers for other animals.",
+        { target: UNIT_SYSTEMS.IMPERIAL },
+      ),
+    ).to.equal(
+      "The target beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger, or 25 miles for other animals.",
+    );
   });
 
   it("should convert Japanese sentences", function () {

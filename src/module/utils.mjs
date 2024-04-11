@@ -57,7 +57,6 @@ export const IMPERIAL_UNITS = Object.freeze({
   FEET: "ft",
   MILE: "mi",
 });
-/** @typedef {"lbs" | "ft" | "mi"} ImperialUnit */
 
 /**
  * An enum of metric units
@@ -70,11 +69,6 @@ export const METRIC_UNITS = Object.freeze({
   METER: "m",
   KM: "km",
 });
-/** @typedef {"kg" | "m" | "km"} MetricUnit */
-
-/** @typedef {ImperialUnit | MetricUnit} Unit */
-/** @typedef {"ft" | "mi" | "m" | "km"} DistanceUnit */
-/** @typedef {"lbs" | "kg"} WeightUnit */
 
 /**
  * An enum containing available units
@@ -97,8 +91,6 @@ export const UNIT_SYSTEMS = Object.freeze({
   METRIC: "metric",
   IMPERIAL: "imperial",
 });
-
-/** @typedef {"metric" | "imperial"} UnitSystem */
 
 /**
  *
@@ -191,41 +183,6 @@ export const localize = (key, data = {}) => {
 };
 
 /**
- * Sets a value using a data path in an object, prefixing the path with this Foundry version's path for system data.
- *
- * @see {@link foundry.utils.setProperty}
- * @param {object} data
- * @param {string} path
- * @param {*} value
- * @returns {boolean}
- */
-export const setSystemProperty = (data, path, value) => {
-  const isV10 = game.release.generation > 9;
-  const systemPrefix = isV10 ? "system." : "data.";
-  return foundry.utils.setProperty(data, systemPrefix + path, value);
-};
-
-/**
- * Gets a value using a data path in an object, prefixing the path with this Foundry version's path for system data.
- *
- * @param {object} data
- * @param {string} path
- * @returns {*}
- */
-export const getSystemProperty = (data, path) => {
-  const isV10 = game.release.generation > 9;
-  const systemPrefix = isV10 ? "system." : "data.";
-  return foundry.utils.getProperty(data, systemPrefix + path);
-};
-
-/**
- * @typedef {object} ConversionOptions
- * @property {null | UnitSystem} [target=null] - The unit system to convert to; if null, convert to the other system;
- *   if defined, values already belonging to that system will not be converted.
- * @property {null | UnitSystem} [current=null] - The unit system to convert from; if null, convert from the other system;
- */
-
-/**
  * Merges a partial options object into a full options object
  *
  * @param {Partial<ConversionOptions>} [options={}] - A set of options to be merged into the default options
@@ -241,14 +198,3 @@ export const getConversionOptions = (options = {}) => {
     ...options,
   };
 };
-
-/**
- * Checks whether an object is empty
- *
- * @see {@link foundry.utils.isEmpty}
- * @see {@link foundry.utils.isObjectEmpty}
- * @param {object|[]} obj - The object to check
- * @returns {boolean} Whether the object is empty
- */
-export const isEmpty = (obj) =>
-  game.release.generation > 9 ? foundry.utils.isEmpty(obj) : foundry.utils.isObjectEmpty(obj);

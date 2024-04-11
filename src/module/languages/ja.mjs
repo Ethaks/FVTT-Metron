@@ -5,11 +5,11 @@
 /** @type {LanguageModule} */
 const languageModule = {
   unitRegexes: {
-    lbs: [/ポンド/u],
+    lbs: [/ポンド/u, /㍀/u],
     kg: [/キログラム/u],
-    ft: [/フィート/u],
+    ft: [/フィート/u, /㌳/u],
     m: [/メートル/u],
-    mi: [/マイル/u],
+    mi: [/マイル/u, /㍄/u],
     km: [/キロメートル/u],
   },
   requireExactMatch: false,
