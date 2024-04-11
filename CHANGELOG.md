@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.1.1...v0.2.0) (2024-04-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* require Foundry v11
+
+### Features
+
+* convert new fields ([df8a52b](https://github.com/Ethaks/FVTT-Metron/commit/df8a52b54d0af23a8729cb1db6bf4970c559e5dc))
+
 ### [0.1.1](https://github.com/Ethaks/FVTT-Metron/compare/v0.1.0...v0.1.1) (2023-01-19)
 
 
