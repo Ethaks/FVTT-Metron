@@ -26,16 +26,21 @@ export const onSheetHeaderButtons = (sheet, buttons) => {
        * @param {MouseEvent<HTMLElement>} event
        * @returns {Promise<void>}
        */
-      onclick: (event) => {
+      onclick: async (event) => {
         const defaultTarget = game.settings.get(MODULE_ID, "targetUnitSystem");
         const reverseTarget =
           defaultTarget === UNIT_SYSTEMS.METRIC ? UNIT_SYSTEMS.IMPERIAL : UNIT_SYSTEMS.METRIC;
-        const options = { target: event.shiftKey ? reverseTarget : defaultTarget };
+        const options = {
+          target: event.shiftKey ? reverseTarget : defaultTarget,
+        };
         switch (sheet.object.documentName) {
           case "Item":
-            return convertItem(sheet.object, options);
+            return convertItem(sheet.object, {
+              ...options,
+              convertContents: true,
+            }).then(() => sheet.render());
           case "Actor":
-            return convertActor(sheet.object, options);
+            return convertActor(sheet.object, options).then(() => sheet.render());
           case "Scene":
             return convertScene(sheet.object, options);
           case "JournalEntry":

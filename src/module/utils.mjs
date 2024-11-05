@@ -53,7 +53,8 @@ export const convertWeight = (value, unit = UNITS.LBS) => {
  * @readonly
  */
 export const IMPERIAL_UNITS = Object.freeze({
-  LBS: "lbs",
+  LBS: "lb",
+  TON: "tn",
   FEET: "ft",
   MILE: "mi",
 });
@@ -66,6 +67,7 @@ export const IMPERIAL_UNITS = Object.freeze({
  */
 export const METRIC_UNITS = Object.freeze({
   KG: "kg",
+  TONNE: "t",
   METER: "m",
   KM: "km",
 });
@@ -109,7 +111,8 @@ export const getUnitSystem = (unit) => {
  * @param {Unit} unit
  * @returns {boolean}
  */
-export const isWeightUnit = (unit) => unit === UNITS.LBS || unit === UNITS.KG;
+export const isWeightUnit = (unit) =>
+  unit === UNITS.LBS || unit === UNITS.KG || unit === UNITS.TON || unit === UNITS.TONNE;
 
 /**
  * Returns a units paired unit from the other {@link UnitSystem}
@@ -118,12 +121,27 @@ export const isWeightUnit = (unit) => unit === UNITS.LBS || unit === UNITS.KG;
  * @returns {MetricUnit|ImperialUnit}
  */
 export const getOtherUnit = (unit) => {
-  if (unit === UNITS.LBS) return UNITS.KG;
-  if (unit === UNITS.FEET) return UNITS.METER;
-  if (unit === UNITS.MILE) return UNITS.KM;
-  if (unit === UNITS.KG) return UNITS.LBS;
-  if (unit === UNITS.METER) return UNITS.FEET;
-  if (unit === UNITS.KM) return UNITS.MILE;
+  switch (unit) {
+    // Weight
+    case UNITS.LBS:
+      return UNITS.KG;
+    case UNITS.KG:
+      return UNITS.LBS;
+    case UNITS.TON:
+      return UNITS.TONNE;
+    case UNITS.TONNE:
+      return UNITS.TON;
+
+    // Distance
+    case UNITS.FEET:
+      return UNITS.METER;
+    case UNITS.METER:
+      return UNITS.FEET;
+    case UNITS.MILE:
+      return UNITS.KM;
+    case UNITS.KM:
+      return UNITS.MILE;
+  }
 };
 
 /**
@@ -133,7 +151,7 @@ export const getOtherUnit = (unit) => {
  * @enum {RegExp[]}
  */
 const unitRegexes = {
-  lbs: [/lbs?/, /pounds?/],
+  lb: [/lbs?/, /pounds?/],
   kg: [/kgs?/, /kilograms?/],
   ft: [/ft/, /foot/, /feet/],
   mi: [/mi/, /miles?/],

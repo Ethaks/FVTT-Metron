@@ -59,10 +59,10 @@ export const registerSettings = () => {
 
 export const applyWeightConversionOverride = (simplified = false) => {
   if (simplified) {
-    CONFIG.DND5E.encumbrance.strMultiplier.metric = 7.5;
-    CONFIG.DND5E.encumbrance.currencyPerWeight.metric = 100;
+    CONFIG.DND5E.weightUnits.kg.conversion = 2;
+    CONFIG.DND5E.weightUnits.Mg.conversion = 2_000;
   } else {
-    CONFIG.DND5E.encumbrance.strMultiplier.metric = 6.8;
-    CONFIG.DND5E.encumbrance.currencyPerWeight.metric = 110;
+    CONFIG.DND5E.weightUnits.kg.conversion = 2.5;
+    CONFIG.DND5E.weightUnits.Mg.conversion = 2_500;
   }
 };

@@ -26,14 +26,14 @@ const COPY_FILES = ["LICENSE", "CHANGELOG.md"];
 const config = defineConfig(() => {
   return {
     root: "src/",
-    base: "/modules/metron/",
+    base: "/dev/modules/metron/",
     publicDir: resolve("public"),
     server: {
       port: 30001,
       open: false,
       proxy: {
-        [`^(?!/modules/metron)`]: "http://localhost:30000/",
-        ["/socket.io/"]: {
+        [`^(?!/dev/modules/metron)`]: "http://localhost:30000/",
+        ["/dev/socket.io/"]: {
           target: "ws://localhost:30000",
           ws: true,
         },

@@ -12,6 +12,7 @@ import {
   MODULE_ID,
 } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
+import { convertActivityData } from "./activity.mjs";
 
 /**
  *
@@ -26,8 +27,6 @@ export const convertItemData = (data, options = {}) => {
   /** @type {UnitSystem} */
   const currentUnitSystem = data.flags[MODULE_ID]?.unitSystem ?? "imperial";
   if (!(target !== null && currentUnitSystem === target)) {
-    /** @type {WeightUnit} */
-    const currentUnits = currentUnitSystem === "imperial" ? "lbs" : "kg";
     foundry.utils.setProperty(
       updateData,
       `flags.${MODULE_ID}.unitSystem`,
@@ -51,9 +50,14 @@ export const convertItemData = (data, options = {}) => {
     }
 
     // If the item has a weight, convert it to the other system
-    // TODO: Repeatedly converting item without weight
-    if (systemData.weight != null) {
-      updateData.weight = convertWeight(systemData.weight, currentUnits);
+    if (systemData.weight?.value) {
+      const units = getUnitFromString(systemData.weight.units ?? "");
+      if (units && getUnitSystem(units) !== target) {
+        updateData.system.weight = {
+          units: getOtherUnit(units),
+          value: convertWeight(systemData.weight.value, units),
+        };
+      }
     }
   }
 
@@ -92,11 +96,42 @@ export const convertItemData = (data, options = {}) => {
     }
   }
 
+  // Activities
+  if (!foundry.utils.isEmpty(systemData.activities)) {
+    for (const [id, activity] of Object.entries(systemData.activities)) {
+      // Convert the activity data
+      const convertedActivity = convertActivityData(activity, options);
+      if (!foundry.utils.isEmpty(convertedActivity)) {
+        updateData.system.activities ??= {};
+        updateData.system.activities[id] = convertedActivity;
+      }
+    }
+  }
+
   return updateData;
 };
 
 export const convertItem = async (item, options = {}) => {
   const itemData = item.toObject();
   const updateData = convertItemData(itemData, options);
-  await item.update(updateData);
+
+  if (item.type !== "container") return item.update(updateData);
+
+  // Handle container content sibling items
+  if (item.type === "container" && options.convertContents) {
+    const itemUpdates = [{ _id: item.id, ...updateData }];
+
+    for (const content of await item.system.allContainedItems) {
+      const contentData = content.toObject();
+      const contentUpdate = convertItemData(contentData, options);
+      itemUpdates.push({ _id: content.id, ...contentUpdate });
+    }
+
+    if (item.isEmbedded) return item.parent.updateEmbeddedDocuments("Item", itemUpdates);
+    else if (item.pack)
+      return Item.implementation.updateDocuments(itemUpdates, {
+        pack: item.pack,
+      });
+    else return Item.implementation.updateDocuments(itemUpdates);
+  }
 };

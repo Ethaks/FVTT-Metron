@@ -5,13 +5,13 @@
 export {};
 
 declare global {
-  type ImperialUnit = "lbs" | "ft" | "mi";
+  type ImperialUnit = "lb" | "ft" | "mi";
   type MetricUnit = "kg" | "m" | "km";
 
   type Unit = ImperialUnit | MetricUnit;
 
   type DistanceUnit = "ft" | "mi" | "m" | "km";
-  type WeightUnit = "lbs" | "kg";
+  type WeightUnit = "lb" | "kg";
 
   type UnitSystem = "imperial" | "metric";
 

@@ -5,7 +5,7 @@
 /** @type {LanguageModule} */
 const languageModule = {
   unitRegexes: {
-    lbs: [/ポンド/u, /㍀/u],
+    lb: [/ポンド/u, /㍀/u],
     kg: [/キログラム/u],
     ft: [/フィート/u, /㌳/u],
     m: [/メートル/u],
