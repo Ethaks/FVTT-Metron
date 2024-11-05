@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2024 Ethaks <ethaks@pm.me>
+//
+// SPDX-License-Identifier: MIT
+
 import { convertString } from "../strings.mjs";
 import {
   convertDistance,
