@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.2.0...v0.3.0) (2024-11-05)
+
+
+### Features
+
+* convert activities, container and race items ([390dd96](https://github.com/Ethaks/FVTT-Metron/commit/390dd96ac76e9562831560d9a1cb5037b2027493))
+
+
+### Bug Fixes
+
+* adjust for grid data nesting ([717ee25](https://github.com/Ethaks/FVTT-Metron/commit/717ee259b52118337b534923e50c2be9a2ac27ac))
+
 ## [0.2.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.1.1...v0.2.0) (2024-04-11)
 
 

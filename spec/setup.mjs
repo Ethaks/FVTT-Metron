@@ -79,7 +79,8 @@ class Game {
     format: (stringId, data = {}) => {
       let str =
         getProperty(this.translations[game.i18n.lang], stringId) ??
-        getProperty(this.translations.en, stringId);
+        getProperty(this.translations.en, stringId) ??
+        "";
       const fmt = /{[^}]+}/g;
       str = str.replace(fmt, (k) => {
         return data[k.slice(1, -1)];
