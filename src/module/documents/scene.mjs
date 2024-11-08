@@ -138,7 +138,7 @@ const convertLightData = (light, options = {}) => {
 };
 
 export const convertScene = async (scene, options) => {
-  const updateData = convertSceneData(scene.data, options);
+  const updateData = convertSceneData(scene.toObject(), options);
   await scene.update(updateData);
   scene.tokens.forEach((token) => (token._actor = null));
 };
