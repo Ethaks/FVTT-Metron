@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.2...v0.3.3) (2024-11-08)
+
+
+### Bug Fixes
+
+* convert item area templates ([9e2f29e](https://github.com/Ethaks/FVTT-Metron/commit/9e2f29e0cdff71fa2eeac4cf19dc8ce5ef0293b6))
+* convert scenes again ([e85f1f3](https://github.com/Ethaks/FVTT-Metron/commit/e85f1f375d2e82219fe5cf67668eb9524d84307c))
+* only convert ability ranges with distances ([4829d38](https://github.com/Ethaks/FVTT-Metron/commit/4829d385992ed768a7900fe4b03c11db6b3493fd))
+
 ### [0.3.2](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.1...v0.3.2) (2024-11-05)
 
 ### [0.3.1](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.0...v0.3.1) (2024-11-05)
