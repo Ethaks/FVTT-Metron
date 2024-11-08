@@ -74,14 +74,16 @@ export const convertItemData = (data, options = {}) => {
     }
   }
 
-  // Target data
-  if (systemData.target) {
-    const units = getUnitFromString(systemData.target.units ?? "");
-    // Only handle metric/imperial units, not touch etc.
-    if (units && getUnitSystem(units) !== target) {
-      updateData.system.target = {
+  // Target
+  if (systemData.target?.template?.units) {
+    const units = getUnitFromString(systemData.target.template.units);
+    const unitSystem = getUnitSystem(units);
+    const value = systemData.target.template.size || 0;
+    if (unitSystem !== target && Number.isNumeric(value)) {
+      updateData.system.target ??= {};
+      updateData.system.target.template = {
         units: getOtherUnit(units),
-        value: convertDistance(systemData.target.value, units),
+        size: `${convertDistance(Number.fromString(value), units)}`,
       };
     }
   }
