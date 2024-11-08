@@ -62,7 +62,7 @@ export const convertItemData = (data, options = {}) => {
   }
 
   // Ability range
-  if (systemData.range) {
+  if (systemData.range && !(systemData.range.units in CONFIG.DND5E.rangeTypes)) {
     const units = getUnitFromString(systemData.range.units ?? "");
     // Only handle metric/imperial units, not touch etc.
     if (units && getUnitSystem(units) !== target) {
