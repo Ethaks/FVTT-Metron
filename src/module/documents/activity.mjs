@@ -30,7 +30,7 @@ export const convertActivityData = (data, options = {}) => {
   }
 
   // Range
-  if (data.range.override && data.range?.units) {
+  if (data.range?.override && data.range?.units) {
     const units = getUnitFromString(data.range.units);
     const unitSystem = getUnitSystem(units);
     if (unitSystem !== target) {
