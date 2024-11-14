@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.3...v0.3.4) (2024-11-14)
+
+
+### Bug Fixes
+
+* avoid error when converting activity without range ([39432d2](https://github.com/Ethaks/FVTT-Metron/commit/39432d2456778ffa51d13110d2cb064cd4314a0c))
+
 ### [0.3.3](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.2...v0.3.3) (2024-11-08)
 
 

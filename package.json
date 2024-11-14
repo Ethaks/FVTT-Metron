@@ -3,7 +3,7 @@
   "name": "metron",
   "description": "Convert Foundry VTT documents from the imperial system to the metric system and vice versa.",
   "license": "MIT",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "homepage": "https://github.com/Ethaks/FVTT-Metron",
   "repository": {
     "type": "git",
