@@ -8,56 +8,56 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 /** @type {import("eslint").ESLint.ConfigData} */
 export default [
-	js.configs.recommended,
-	eslintConfigPrettier,
-	{
-		ignores: ["**/dist", "coverage/"],
-	},
-	{
-		plugins: {},
+  js.configs.recommended,
+  eslintConfigPrettier,
+  {
+    ignores: ["**/dist", "coverage/"],
+  },
+  {
+    plugins: {},
 
-		languageOptions: {
-			globals: {
-				...globals.browser,
-				game: "readonly",
-				Hooks: "readonly",
-				CONFIG: "readonly",
-				foundry: "readonly",
-				Application: "readonly",
-				Actor: "readonly",
-				Item: "readonly",
-			},
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        game: "readonly",
+        Hooks: "readonly",
+        CONFIG: "readonly",
+        foundry: "readonly",
+        Application: "readonly",
+        Actor: "readonly",
+        Item: "readonly",
+      },
 
-			ecmaVersion: 2022,
-			sourceType: "module",
+      ecmaVersion: 2022,
+      sourceType: "module",
 
-			parserOptions: {
-				extraFileExtensions: [".cjs", ".mjs"],
-			},
-		},
+      parserOptions: {
+        extraFileExtensions: [".cjs", ".mjs"],
+      },
+    },
 
-		rules: {
-			"no-unused-vars": [
-				"error",
-				{
-					args: "none",
-					argsIgnorePattern: "^_",
-				},
-			],
-		},
-	},
+    rules: {
+      "no-unused-vars": [
+        "error",
+        {
+          args: "none",
+          argsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
 
-	{
-		files: ["./*.js", "./*.cjs", "./*.mjs", "./tools/*.mjs", "./tools/*.cjs"],
-		languageOptions: {
-			globals: {
-				...globals.node,
-			},
-		},
-	},
+  {
+    files: ["./*.js", "./*.cjs", "./*.mjs", "./tools/*.mjs", "./tools/*.cjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
 
-	{
-		files: ["**/*.cjs"],
-		languageOptions: { sourceType: "commonjs" },
-	},
+  {
+    files: ["**/*.cjs"],
+    languageOptions: { sourceType: "commonjs" },
+  },
 ];

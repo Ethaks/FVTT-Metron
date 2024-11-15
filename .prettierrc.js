@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: MIT
 
 const config = {
-    semi: true,
-    trailingComma: "all",
-    printWidth: 100,
-    tabWidth: 4,
+  semi: true,
+  trailingComma: "all",
+  printWidth: 100,
+  tabWidth: 2,
 };
 export default config;
