@@ -1,6 +1,14 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [0.3.5](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.4...v0.3.5) (2024-11-15)
+
+
+### Bug Fixes
+
+* convert automatic unit for senses/movement ([bab7c07](https://github.com/Ethaks/FVTT-Metron/commit/bab7c070a3431a6e2aaedeba3f6df71db60e4b40))
+* restrict conversion to numeric ranges in activities ([700d25d](https://github.com/Ethaks/FVTT-Metron/commit/700d25d2e06bd62c468b2cd73a7986d8da30d546))
 
 ### [0.3.4](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.3...v0.3.4) (2024-11-14)
 
