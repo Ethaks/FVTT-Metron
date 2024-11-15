@@ -18,7 +18,6 @@ import * as strings from "./strings.mjs";
 import * as utils from "./utils.mjs";
 
 // Import style sheet
-import "../styles/metron.css";
 import { onSheetHeaderButtons } from "./sheets.mjs";
 
 // API

@@ -12,7 +12,6 @@
 	"version": "0.3.4",
 	"compatibility": { "minimum": "12", "verified": "12" },
 	"esmodules": ["metron.js"],
-	"styles": ["style.css"],
 	"languages": [
 		{ "lang": "en", "name": "English", "path": "lang/en.json" },
 		{ "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
