@@ -4,9 +4,7 @@
 
 import { convertItemData } from "./item.mjs";
 import {
-  convertDistance,
   getConversionOptions,
-  getOtherUnit,
   getUnitFromString,
   getUnitSystem,
   MODULE_ID,
@@ -15,6 +13,7 @@ import {
 } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
 import { convertTokenVisionData } from "./scene.mjs";
+import { convertDistanceField } from "./common.mjs";
 
 /**
  * An array of dot separated paths to string properties that should be converted for normal actors.
@@ -65,21 +64,7 @@ export const convertActorData = (actor, options = {}) => {
   if (!actor.items.some((i) => i.type === "race")) {
     for (const field of ["senses", "movement"]) {
       const fieldData = actor.system?.attributes?.[field];
-      if (fieldData && fieldData.units) {
-        const units = getUnitFromString(fieldData.units);
-        if (getUnitSystem(units) !== target) {
-          updateData.system[`attributes.${field}.units`] = getOtherUnit(units);
-          const dataFields = Object.keys(fieldData);
-          for (const dataField of dataFields) {
-            if (fieldData[dataField] && typeof fieldData[dataField] === "number") {
-              updateData.system[`attributes.${field}.${dataField}`] = convertDistance(
-                fieldData[dataField],
-                units,
-              );
-            }
-          }
-        }
-      }
+      updateData.system.attributes[field] = convertDistanceField(fieldData, target);
     }
   }
 

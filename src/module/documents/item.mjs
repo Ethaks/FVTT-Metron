@@ -13,6 +13,7 @@ import {
 } from "../utils.mjs";
 import { convertString } from "../strings.mjs";
 import { convertActivityData } from "./activity.mjs";
+import { convertDistanceField } from "./common.mjs";
 
 /**
  *
@@ -32,32 +33,24 @@ export const convertItemData = (data, options = {}) => {
       `flags.${MODULE_ID}.unitSystem`,
       currentUnitSystem === "imperial" ? "metric" : "imperial",
     );
+  }
 
-    // Race
-    if (data.type === "race") {
-      for (const field of ["senses", "movement"]) {
-        if (!systemData[field] || !systemData[field].units) continue;
-        const units = getUnitFromString(systemData[field].units ?? "");
-        if (getUnitSystem(units) === target) continue;
-        updateData.system[field] ??= {};
-        updateData.system[field].units = getOtherUnit(units);
-        for (const key of Object.keys(systemData[field])) {
-          if (typeof systemData[field][key] === "number") {
-            updateData.system[field][key] = convertDistance(systemData[field][key], units);
-          }
-        }
-      }
+  // Race
+  if (data.type === "race") {
+    for (const field of ["senses", "movement"]) {
+      if (!systemData[field]) continue;
+      updateData.system[field] = convertDistanceField(systemData[field], target);
     }
+  }
 
-    // If the item has a weight, convert it to the other system
-    if (systemData.weight?.value) {
-      const units = getUnitFromString(systemData.weight.units ?? "");
-      if (units && getUnitSystem(units) !== target) {
-        updateData.system.weight = {
-          units: getOtherUnit(units),
-          value: convertWeight(systemData.weight.value, units),
-        };
-      }
+  // If the item has a weight, convert it to the other system
+  if (systemData.weight?.value) {
+    const units = getUnitFromString(systemData.weight.units ?? "");
+    if (units && getUnitSystem(units) !== target) {
+      updateData.system.weight = {
+        units: getOtherUnit(units),
+        value: convertWeight(systemData.weight.value, units),
+      };
     }
   }
 
