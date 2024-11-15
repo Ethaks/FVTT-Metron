@@ -1,31 +1,31 @@
 {
-  "METRON": {
-    "Convert": "単位変換",
-    "Settings": {
-      "TargetUnitSystem": "単位変換先",
-      "TargetUnitSystemHint": "「変換」ボタンが押されたときに適用される単位システム",
-      "GridUnitSystem": "マス単位変換先",
-      "GridUnitSystemHint": "新しいシーンが作成されたときに適用されるマス目のデフォルトの単位システム",
-      "DecimalSeparator": "小数点区切り記号",
-      "DecimalSeparatorHint": "小数点を区分けするための記号を設定します。例えば1.000が「千」か「1と3つの小数点」なのかを分けたいときに使ってください。"
-    },
-    "Imperial": "ヤード・ポンド法",
-    "Metric": "メートル法",
-    "UnitsShort": {
-      "lbs": "lbs",
-      "kg": "kg",
-      "ft": "ft",
-      "m": "m",
-      "mi": "mi",
-      "km": "km"
-    },
-    "UnitsLong": {
-      "lbs": "ポンド",
-      "kg": "キログラム",
-      "ft": "フィート",
-      "m": "メートル",
-      "mi": "マイル",
-      "km": "キロメートル"
-    }
-  }
+	"METRON": {
+		"Convert": "単位変換",
+		"Settings": {
+			"TargetUnitSystem": "単位変換先",
+			"TargetUnitSystemHint": "「変換」ボタンが押されたときに適用される単位システム",
+			"GridUnitSystem": "マス単位変換先",
+			"GridUnitSystemHint": "新しいシーンが作成されたときに適用されるマス目のデフォルトの単位システム",
+			"DecimalSeparator": "小数点区切り記号",
+			"DecimalSeparatorHint": "小数点を区分けするための記号を設定します。例えば1.000が「千」か「1と3つの小数点」なのかを分けたいときに使ってください。"
+		},
+		"Imperial": "ヤード・ポンド法",
+		"Metric": "メートル法",
+		"UnitsShort": {
+			"lbs": "lbs",
+			"kg": "kg",
+			"ft": "ft",
+			"m": "m",
+			"mi": "mi",
+			"km": "km"
+		},
+		"UnitsLong": {
+			"lbs": "ポンド",
+			"kg": "キログラム",
+			"ft": "フィート",
+			"m": "メートル",
+			"mi": "マイル",
+			"km": "キロメートル"
+		}
+	}
 }

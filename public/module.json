@@ -1,29 +1,29 @@
 {
-  "id": "metron",
-  "name": "metron",
-  "title": "Metron",
-  "description": "Convert measurements from the metric system to the imperial system and vice versa.",
-  "authors": [{ "name": "Ethaks", "email": "ethaks@pm.me", "discord": "ethaks" }],
-  "url": "This is auto replaced",
-  "license": "MIT",
-  "readme": "https://github.com/Ethaks/FVTT-Metron/blob/master/README.md",
-  "bugs": "https://github.com/Ethaks/FVTT-Metron/issues",
-  "changelog": "https://github.com/Ethaks/FVTT-Metron/blob/master/CHANGELOG.md",
-  "version": "0.3.4",
-  "compatibility": { "minimum": "12", "verified": "12" },
-  "esmodules": ["metron.js"],
-  "styles": ["style.css"],
-  "languages": [
-    { "lang": "en", "name": "English", "path": "lang/en.json" },
-    { "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
-  ],
-  "relationships": {
-    "systems": [{ "id": "dnd5e", "verified": "4.0.0" }],
-    "requires": [],
-    "conflicts": []
-  },
-  "socket": false,
-  "manifest": "This is auto replaced",
-  "download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.3.4/module.zip",
-  "library": false
+	"id": "metron",
+	"name": "metron",
+	"title": "Metron",
+	"description": "Convert measurements from the metric system to the imperial system and vice versa.",
+	"authors": [{ "name": "Ethaks", "email": "ethaks@pm.me", "discord": "ethaks" }],
+	"url": "This is auto replaced",
+	"license": "MIT",
+	"readme": "https://github.com/Ethaks/FVTT-Metron/blob/master/README.md",
+	"bugs": "https://github.com/Ethaks/FVTT-Metron/issues",
+	"changelog": "https://github.com/Ethaks/FVTT-Metron/blob/master/CHANGELOG.md",
+	"version": "0.3.4",
+	"compatibility": { "minimum": "12", "verified": "12" },
+	"esmodules": ["metron.js"],
+	"styles": ["style.css"],
+	"languages": [
+		{ "lang": "en", "name": "English", "path": "lang/en.json" },
+		{ "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
+	],
+	"relationships": {
+		"systems": [{ "id": "dnd5e", "verified": "4.0.0" }],
+		"requires": [],
+		"conflicts": []
+	},
+	"socket": false,
+	"manifest": "This is auto replaced",
+	"download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.3.4/module.zip",
+	"library": false
 }

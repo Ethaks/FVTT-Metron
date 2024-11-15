@@ -13,19 +13,19 @@ import { convertDistance, getOtherUnit, getUnitFromString, getUnitSystem } from 
  * @returns {object} The converted data
  */
 export function convertDistanceField(field, target) {
-  const units = getUnitFromString(
-    field.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0].toLowerCase(),
-  );
+	const units = getUnitFromString(
+		field.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0].toLowerCase(),
+	);
 
-  // No conversion required, field matches target system
-  if (getUnitSystem(units) === target) return {};
+	// No conversion required, field matches target system
+	if (getUnitSystem(units) === target) return {};
 
-  const updateData = {};
-  updateData.units = getOtherUnit(units);
-  for (const key of Object.keys(field)) {
-    if (typeof field[key] === "number") {
-      updateData[key] = convertDistance(field[key], units);
-    }
-  }
-  return updateData;
+	const updateData = {};
+	updateData.units = getOtherUnit(units);
+	for (const key of Object.keys(field)) {
+		if (typeof field[key] === "number") {
+			updateData[key] = convertDistance(field[key], units);
+		}
+	}
+	return updateData;
 }

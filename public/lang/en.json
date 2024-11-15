@@ -1,33 +1,33 @@
 {
-  "METRON": {
-    "Convert": "Convert",
-    "Settings": {
-      "TargetUnitSystem": "Target Unit System",
-      "TargetUnitSystemHint": "The unit system to which data is converted when a \"Convert\" button is clicked",
-      "GridUnitSystem": "Grid Unit System",
-      "GridUnitSystemHint": "The unit system with which new scenes (i.e. grid units and distance) are created",
-      "DecimalSeparator": "Decimal Separator",
-      "DecimalSeparatorHint": "The decimal separator used to determine whether a number is a decimal; necessary for determining whether 1.000 is one thousand or one with three decimal places",
-      "OverrideWeightConversion": "Override Weight Conversion",
-      "OverrideWeightConversionHint": "Whether to override the system's weight conversion rate with a simplified one (2 lbs = 1 kg)"
-    },
-    "Imperial": "Imperial",
-    "Metric": "Metric",
-    "UnitsShort": {
-      "lbs": "lbs",
-      "kg": "kg",
-      "ft": "ft",
-      "m": "m",
-      "mi": "mi",
-      "km": "km"
-    },
-    "UnitsLong": {
-      "lbs": "pounds",
-      "kg": "kilograms",
-      "ft": "feet",
-      "m": "meters",
-      "mi": "miles",
-      "km": "kilometers"
-    }
-  }
+	"METRON": {
+		"Convert": "Convert",
+		"Settings": {
+			"TargetUnitSystem": "Target Unit System",
+			"TargetUnitSystemHint": "The unit system to which data is converted when a \"Convert\" button is clicked",
+			"GridUnitSystem": "Grid Unit System",
+			"GridUnitSystemHint": "The unit system with which new scenes (i.e. grid units and distance) are created",
+			"DecimalSeparator": "Decimal Separator",
+			"DecimalSeparatorHint": "The decimal separator used to determine whether a number is a decimal; necessary for determining whether 1.000 is one thousand or one with three decimal places",
+			"OverrideWeightConversion": "Override Weight Conversion",
+			"OverrideWeightConversionHint": "Whether to override the system's weight conversion rate with a simplified one (2 lbs = 1 kg)"
+		},
+		"Imperial": "Imperial",
+		"Metric": "Metric",
+		"UnitsShort": {
+			"lbs": "lbs",
+			"kg": "kg",
+			"ft": "ft",
+			"m": "m",
+			"mi": "mi",
+			"km": "km"
+		},
+		"UnitsLong": {
+			"lbs": "pounds",
+			"kg": "kilograms",
+			"ft": "feet",
+			"m": "meters",
+			"mi": "miles",
+			"km": "kilometers"
+		}
+	}
 }

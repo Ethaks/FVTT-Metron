@@ -23,44 +23,44 @@ import { onSheetHeaderButtons } from "./sheets.mjs";
 
 // API
 export const metron = {
-  item,
-  actor,
-  scene,
-  packs,
-  journal,
-  strings,
-  utils,
+	item,
+	actor,
+	scene,
+	packs,
+	journal,
+	strings,
+	utils,
 };
 
 // Initialize module
 Hooks.once("init", async () => {
-  console.log(`${utils.MODULE_ID} | Initializing metron`);
+	console.log(`${utils.MODULE_ID} | Initializing metron`);
 
-  // Register custom module settings
-  settings.registerSettings();
+	// Register custom module settings
+	settings.registerSettings();
 
-  CONFIG.compatibility?.excludePatterns?.push(/metron/);
+	CONFIG.compatibility?.excludePatterns?.push(/metron/);
 });
 
 Hooks.once("setup", () => {
-  const moduleData = game.modules.get(utils.MODULE_ID);
-  foundry.utils.setProperty(moduleData, "api", metron);
+	const moduleData = game.modules.get(utils.MODULE_ID);
+	foundry.utils.setProperty(moduleData, "api", metron);
 
-  // Override the system's default weight conversion rate with simplified one
-  const overrideWeightConversion = game.settings.get(utils.MODULE_ID, "overrideWeightConversion");
-  if (overrideWeightConversion) {
-    settings.applyWeightConversionOverride(overrideWeightConversion);
-  }
+	// Override the system's default weight conversion rate with simplified one
+	const overrideWeightConversion = game.settings.get(utils.MODULE_ID, "overrideWeightConversion");
+	if (overrideWeightConversion) {
+		settings.applyWeightConversionOverride(overrideWeightConversion);
+	}
 });
 
 Hooks.once("ready", () => {
-  if (game.settings.get(utils.MODULE_ID, "gridUnitSystem") === "metric") {
-    const currentGridUnits = utils.getUnitFromString(game.system.grid.units);
-    if (currentGridUnits === utils.UNITS.FEET && game.system.grid.distance === 5) {
-      game.system.grid.units = utils.localize(`UnitsShort.${utils.UNITS.METER}`);
-      game.system.grid.distance = 1.5;
-    }
-  }
+	if (game.settings.get(utils.MODULE_ID, "gridUnitSystem") === "metric") {
+		const currentGridUnits = utils.getUnitFromString(game.system.grid.units);
+		if (currentGridUnits === utils.UNITS.FEET && game.system.grid.distance === 5) {
+			game.system.grid.units = utils.localize(`UnitsShort.${utils.UNITS.METER}`);
+			game.system.grid.distance = 1.5;
+		}
+	}
 });
 
 // Header buttons
@@ -71,22 +71,22 @@ Hooks.on("getSceneConfigHeaderButtons", onSheetHeaderButtons);
 
 // Context menu buttons
 Hooks.on("getCompendiumDirectoryEntryContext", (html, buttons) => {
-  buttons.push({
-    name: "METRON.Convert",
-    icon: '<i class="fas fa-pencil-ruler"></i>',
-    callback: (li) => {
-      const pack = game.packs.get(li.data("pack"));
-      if (pack) return packs.convertPack(pack);
-    },
-  });
+	buttons.push({
+		name: "METRON.Convert",
+		icon: '<i class="fas fa-pencil-ruler"></i>',
+		callback: (li) => {
+			const pack = game.packs.get(li.data("pack"));
+			if (pack) return packs.convertPack(pack);
+		},
+	});
 });
 Hooks.on("getSceneDirectoryEntryContext", (html, buttons) => {
-  buttons.push({
-    name: "METRON.Convert",
-    icon: '<i class="fas fa-pencil-ruler"></i>',
-    callback: (li) => {
-      const scene = game.scenes.get(li.data("documentId"));
-      if (scene) return metron.scene.convertScene(scene);
-    },
-  });
+	buttons.push({
+		name: "METRON.Convert",
+		icon: '<i class="fas fa-pencil-ruler"></i>',
+		callback: (li) => {
+			const scene = game.scenes.get(li.data("documentId"));
+			if (scene) return metron.scene.convertScene(scene);
+		},
+	});
 });

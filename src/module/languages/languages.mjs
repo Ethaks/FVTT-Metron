@@ -18,7 +18,7 @@ export const languages = { ja };
 
 // Initialise languages
 for (const language of Object.values(languages)) {
-  applyExactMatchRequirement(language.unitRegexes, language.requireExactMatch ?? true);
+	applyExactMatchRequirement(language.unitRegexes, language.requireExactMatch ?? true);
 }
 
 /**

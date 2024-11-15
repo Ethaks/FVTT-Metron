@@ -1,63 +1,63 @@
 {
-  "private": true,
-  "name": "metron",
-  "description": "Convert Foundry VTT documents from the imperial system to the metric system and vice versa.",
-  "license": "MIT",
-  "version": "0.3.4",
-  "homepage": "https://github.com/Ethaks/FVTT-Metron",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Ethaks/FVTT-Metron"
-  },
-  "bugs": {
-    "url": "https://github.com/Ethaks/FVTT-Metron/issues"
-  },
-  "contributors": [
-    {
-      "name": "Ethaks",
-      "email": "ethaks@pm.me"
-    }
-  ],
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "serve": "vite",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|css)\"",
-    "test": "vitest",
-    "test:coverage": "vitest --coverage.enabled",
-    "release": "standard-version"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
-    "@eslint/js": "^9.15.0",
-    "@guanghechen/rollup-plugin-copy": "^2.0.0-alpha.1",
-    "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
-    "@vitest/coverage-v8": "^2.1.5",
-    "@vitest/ui": "^2.1.5",
-    "eslint": "^9.14.0",
-    "eslint-config-prettier": "^9.1.0",
-    "fast-check": "^3.23.1",
-    "fs-extra": "^11.2.0",
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-visualizer": "^5.12.0",
-    "standard-version": "^9.5.0",
-    "vite": "^5.4.11",
-    "vitest": "^2.1.5",
-    "yargs": "^17.7.2"
-  },
-  "lint-staged": {
-    "*.(js|cjs|mjs)": "eslint --fix",
-    "*.(json|yml|css)": "prettier --write"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  }
+	"private": true,
+	"name": "metron",
+	"description": "Convert Foundry VTT documents from the imperial system to the metric system and vice versa.",
+	"license": "MIT",
+	"version": "0.3.4",
+	"homepage": "https://github.com/Ethaks/FVTT-Metron",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ethaks/FVTT-Metron"
+	},
+	"bugs": {
+		"url": "https://github.com/Ethaks/FVTT-Metron/issues"
+	},
+	"contributors": [
+		{
+			"name": "Ethaks",
+			"email": "ethaks@pm.me"
+		}
+	],
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"serve": "vite",
+		"lint": "eslint",
+		"lint:fix": "eslint --fix",
+		"format": "prettier --write \"./**/*.(js|cjs|mjs|json|yml|css)\"",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage.enabled",
+		"release": "standard-version"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.5.0",
+		"@commitlint/config-conventional": "^19.5.0",
+		"@eslint/js": "^9.15.0",
+		"@guanghechen/rollup-plugin-copy": "^2.0.0-alpha.1",
+		"@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+		"@vitest/coverage-v8": "^2.1.5",
+		"@vitest/ui": "^2.1.5",
+		"eslint": "^9.14.0",
+		"eslint-config-prettier": "^9.1.0",
+		"fast-check": "^3.23.1",
+		"fs-extra": "^11.2.0",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
+		"prettier": "^3.3.3",
+		"rollup-plugin-terser": "^7.0.2",
+		"rollup-plugin-visualizer": "^5.12.0",
+		"standard-version": "^9.5.0",
+		"vite": "^5.4.11",
+		"vitest": "^2.1.5",
+		"yargs": "^17.7.2"
+	},
+	"lint-staged": {
+		"*.(js|cjs|mjs)": "eslint --fix",
+		"*.(json|yml|css)": "prettier --write"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	}
 }

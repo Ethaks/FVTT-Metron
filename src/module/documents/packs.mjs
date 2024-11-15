@@ -15,42 +15,42 @@ import { convertJournalEntryData } from "./journal.mjs";
  * @returns {Promise<void>}
  */
 export const convertPack = async (pack, options) => {
-  const { documentName } = pack;
-  if (!["Actor", "Item", "Scene", "JournalEntry"].includes(documentName)) return;
+	const { documentName } = pack;
+	if (!["Actor", "Item", "Scene", "JournalEntry"].includes(documentName)) return;
 
-  options = getConversionOptions(options);
+	options = getConversionOptions(options);
 
-  const wasLocked = pack.locked;
-  await pack.configure({ locked: false });
+	const wasLocked = pack.locked;
+	await pack.configure({ locked: false });
 
-  await pack.migrate();
-  const documents = await pack.getDocuments();
-  const updates = [];
+	await pack.migrate();
+	const documents = await pack.getDocuments();
+	const updates = [];
 
-  for (const document of documents) {
-    let updateData = {};
-    switch (documentName) {
-      case "Actor":
-        updateData = convertActorData(document.toObject(), options);
-        break;
-      case "Item":
-        updateData = convertItemData(document.toObject(), options);
-        break;
-      case "Scene":
-        updateData = convertSceneData(document.toObject(), options);
-        break;
-      case "JournalEntry":
-        updateData = convertJournalEntryData(document.data, options);
-        break;
-    }
+	for (const document of documents) {
+		let updateData = {};
+		switch (documentName) {
+			case "Actor":
+				updateData = convertActorData(document.toObject(), options);
+				break;
+			case "Item":
+				updateData = convertItemData(document.toObject(), options);
+				break;
+			case "Scene":
+				updateData = convertSceneData(document.toObject(), options);
+				break;
+			case "JournalEntry":
+				updateData = convertJournalEntryData(document.data, options);
+				break;
+		}
 
-    if (foundry.utils.isEmpty(updateData)) continue;
-    updates.push({ _id: document.id, ...updateData });
-  }
+		if (foundry.utils.isEmpty(updateData)) continue;
+		updates.push({ _id: document.id, ...updateData });
+	}
 
-  await pack.documentClass.updateDocuments(updates, {
-    pack: pack.metadata.id ?? `${pack.metadata.package}.${pack.metadata.name}`,
-  });
+	await pack.documentClass.updateDocuments(updates, {
+		pack: pack.metadata.id ?? `${pack.metadata.package}.${pack.metadata.name}`,
+	});
 
-  if (wasLocked) await pack.configure({ locked: true });
+	if (wasLocked) await pack.configure({ locked: true });
 };

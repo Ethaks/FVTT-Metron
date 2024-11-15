@@ -16,17 +16,17 @@ export const MODULE_ID = "metron";
  * @returns {number} The converted value
  */
 export const convertDistance = (value, unit) => {
-  switch (unit) {
-    case UNITS.FEET:
-      return Math.round((value / 5) * 1.5 * 100) / 100;
-    case UNITS.MILE:
-      return Math.round(value * 1.5 * 100) / 100;
-    case UNITS.METER:
-      return Math.round((value / 1.5) * 5 * 100) / 100;
-    case UNITS.KM:
-      return Math.round((value / 1.5) * 100) / 100;
-  }
-  throw new Error(`Unknown unit: ${unit}`);
+	switch (unit) {
+		case UNITS.FEET:
+			return Math.round((value / 5) * 1.5 * 100) / 100;
+		case UNITS.MILE:
+			return Math.round(value * 1.5 * 100) / 100;
+		case UNITS.METER:
+			return Math.round((value / 1.5) * 5 * 100) / 100;
+		case UNITS.KM:
+			return Math.round((value / 1.5) * 100) / 100;
+	}
+	throw new Error(`Unknown unit: ${unit}`);
 };
 
 /**
@@ -37,13 +37,13 @@ export const convertDistance = (value, unit) => {
  * @returns {number} The converted value
  */
 export const convertWeight = (value, unit = UNITS.LBS) => {
-  switch (unit) {
-    case UNITS.LBS:
-      return Math.round((value / 2) * 100) / 100;
-    case UNITS.KG:
-      return Math.round(value * 2 * 100) / 100;
-  }
-  throw new Error(`Unknown unit: ${unit}`);
+	switch (unit) {
+		case UNITS.LBS:
+			return Math.round((value / 2) * 100) / 100;
+		case UNITS.KG:
+			return Math.round(value * 2 * 100) / 100;
+	}
+	throw new Error(`Unknown unit: ${unit}`);
 };
 
 /**
@@ -53,10 +53,10 @@ export const convertWeight = (value, unit = UNITS.LBS) => {
  * @readonly
  */
 export const IMPERIAL_UNITS = Object.freeze({
-  LBS: "lb",
-  TON: "tn",
-  FEET: "ft",
-  MILE: "mi",
+	LBS: "lb",
+	TON: "tn",
+	FEET: "ft",
+	MILE: "mi",
 });
 
 /**
@@ -66,10 +66,10 @@ export const IMPERIAL_UNITS = Object.freeze({
  * @readonly
  */
 export const METRIC_UNITS = Object.freeze({
-  KG: "kg",
-  TONNE: "t",
-  METER: "m",
-  KM: "km",
+	KG: "kg",
+	TONNE: "t",
+	METER: "m",
+	KM: "km",
 });
 
 /**
@@ -79,8 +79,8 @@ export const METRIC_UNITS = Object.freeze({
  * @readonly
  */
 export const UNITS = Object.freeze({
-  ...IMPERIAL_UNITS,
-  ...METRIC_UNITS,
+	...IMPERIAL_UNITS,
+	...METRIC_UNITS,
 });
 
 /**
@@ -90,8 +90,8 @@ export const UNITS = Object.freeze({
  * @readonly
  */
 export const UNIT_SYSTEMS = Object.freeze({
-  METRIC: "metric",
-  IMPERIAL: "imperial",
+	METRIC: "metric",
+	IMPERIAL: "imperial",
 });
 
 /**
@@ -100,9 +100,9 @@ export const UNIT_SYSTEMS = Object.freeze({
  * @returns {UnitSystem | null}
  */
 export const getUnitSystem = (unit) => {
-  if (Object.values(IMPERIAL_UNITS).includes(unit)) return UNIT_SYSTEMS.IMPERIAL;
-  if (Object.values(METRIC_UNITS).includes(unit)) return UNIT_SYSTEMS.METRIC;
-  return null;
+	if (Object.values(IMPERIAL_UNITS).includes(unit)) return UNIT_SYSTEMS.IMPERIAL;
+	if (Object.values(METRIC_UNITS).includes(unit)) return UNIT_SYSTEMS.METRIC;
+	return null;
 };
 
 /**
@@ -112,7 +112,7 @@ export const getUnitSystem = (unit) => {
  * @returns {boolean}
  */
 export const isWeightUnit = (unit) =>
-  unit === UNITS.LBS || unit === UNITS.KG || unit === UNITS.TON || unit === UNITS.TONNE;
+	unit === UNITS.LBS || unit === UNITS.KG || unit === UNITS.TON || unit === UNITS.TONNE;
 
 /**
  * Returns a units paired unit from the other {@link UnitSystem}
@@ -121,27 +121,27 @@ export const isWeightUnit = (unit) =>
  * @returns {MetricUnit|ImperialUnit}
  */
 export const getOtherUnit = (unit) => {
-  switch (unit) {
-    // Weight
-    case UNITS.LBS:
-      return UNITS.KG;
-    case UNITS.KG:
-      return UNITS.LBS;
-    case UNITS.TON:
-      return UNITS.TONNE;
-    case UNITS.TONNE:
-      return UNITS.TON;
+	switch (unit) {
+		// Weight
+		case UNITS.LBS:
+			return UNITS.KG;
+		case UNITS.KG:
+			return UNITS.LBS;
+		case UNITS.TON:
+			return UNITS.TONNE;
+		case UNITS.TONNE:
+			return UNITS.TON;
 
-    // Distance
-    case UNITS.FEET:
-      return UNITS.METER;
-    case UNITS.METER:
-      return UNITS.FEET;
-    case UNITS.MILE:
-      return UNITS.KM;
-    case UNITS.KM:
-      return UNITS.MILE;
-  }
+		// Distance
+		case UNITS.FEET:
+			return UNITS.METER;
+		case UNITS.METER:
+			return UNITS.FEET;
+		case UNITS.MILE:
+			return UNITS.KM;
+		case UNITS.KM:
+			return UNITS.MILE;
+	}
 };
 
 /**
@@ -151,12 +151,12 @@ export const getOtherUnit = (unit) => {
  * @enum {RegExp[]}
  */
 const unitRegexes = {
-  lb: [/lbs?/, /pounds?/],
-  kg: [/kgs?/, /kilograms?/],
-  ft: [/ft/, /foot/, /feet/],
-  mi: [/mi/, /miles?/],
-  km: [/kms?/, /kilometers?/, /kilometres?/],
-  m: [/m/, /meters?/, /metres?/],
+	lb: [/lbs?/, /pounds?/],
+	kg: [/kgs?/, /kilograms?/],
+	ft: [/ft/, /foot/, /feet/],
+	mi: [/mi/, /miles?/],
+	km: [/kms?/, /kilometers?/, /kilometres?/],
+	m: [/m/, /meters?/, /metres?/],
 };
 // Require exact matches for English unit strings
 applyExactMatchRequirement(unitRegexes);
@@ -168,17 +168,17 @@ applyExactMatchRequirement(unitRegexes);
  * @returns {[Unit | null, string?]} A tuple containing either the {@link Unit} or null, and the string as it was matched
  */
 export const getUnitMatchFromString = (string) => {
-  const lang = game.i18n.lang;
-  const { unitRegexes: langRegexes = {} } = languages[lang] ?? {};
+	const lang = game.i18n.lang;
+	const { unitRegexes: langRegexes = {} } = languages[lang] ?? {};
 
-  for (const [unit, regexes] of Object.entries(unitRegexes)) {
-    const langUnitRegexes = langRegexes[unit] ?? [];
-    for (const regex of [...regexes, ...langUnitRegexes]) {
-      const [match] = string.match(regex) ?? [];
-      if (match && string.startsWith(match)) return [unit, match];
-    }
-  }
-  return [null];
+	for (const [unit, regexes] of Object.entries(unitRegexes)) {
+		const langUnitRegexes = langRegexes[unit] ?? [];
+		for (const regex of [...regexes, ...langUnitRegexes]) {
+			const [match] = string.match(regex) ?? [];
+			if (match && string.startsWith(match)) return [unit, match];
+		}
+	}
+	return [null];
 };
 
 /**
@@ -197,7 +197,7 @@ export const getUnitFromString = (string) => getUnitMatchFromString(string)[0];
  * @returns {string} The localized string
  */
 export const localize = (key, data = {}) => {
-  return game.i18n.format(`${MODULE_ID.toLocaleUpperCase()}.${key}`, data);
+	return game.i18n.format(`${MODULE_ID.toLocaleUpperCase()}.${key}`, data);
 };
 
 /**
@@ -207,12 +207,12 @@ export const localize = (key, data = {}) => {
  * @returns {ConversionOptions} A full conversion options object
  */
 export const getConversionOptions = (options = {}) => {
-  const defaults = {
-    target: game.settings?.get(MODULE_ID, "targetUnitSystem") ?? "metric",
-    current: null,
-  };
-  return {
-    ...defaults,
-    ...options,
-  };
+	const defaults = {
+		target: game.settings?.get(MODULE_ID, "targetUnitSystem") ?? "metric",
+		current: null,
+	};
+	return {
+		...defaults,
+		...options,
+	};
 };

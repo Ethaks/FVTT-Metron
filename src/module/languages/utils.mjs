@@ -11,10 +11,10 @@
  * @returns {UnitRegexes} The modified object
  */
 export const applyExactMatchRequirement = (regexObject, requireExactMatch = true) => {
-  if (requireExactMatch) {
-    for (const [unit, regexes] of Object.entries(regexObject)) {
-      regexObject[unit] = regexes.map((regex) => new RegExp(`^${regex.source}$`));
-    }
-  }
-  return regexObject;
+	if (requireExactMatch) {
+		for (const [unit, regexes] of Object.entries(regexObject)) {
+			regexObject[unit] = regexes.map((regex) => new RegExp(`^${regex.source}$`));
+		}
+	}
+	return regexObject;
 };
