@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-const prettier = require("prettier");
+const prettier = require("@prettier/sync");
 
 module.exports.readVersion = function (contents) {
 	return JSON.parse(contents).version;
