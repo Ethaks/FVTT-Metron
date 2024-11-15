@@ -1,0 +1,5 @@
+version = 1
+SPDX-PackageName = "Metron"
+SPDX-PackageSupplier = "Ethaks <ethaks@pm.me>"
+SPDX-PackageDownloadLocation = "https://github.com/Ethaks/FVTT-Metron"
+annotations = []
