@@ -6,6 +6,7 @@ import path from "node:path";
 import url from "node:url";
 
 import { defineConfig } from "vite";
+import { coverageConfigDefaults, defineConfig as defineTestConfig } from "vitest/config";
 import { visualizer } from "rollup-plugin-visualizer";
 import { copy } from "@guanghechen/rollup-plugin-copy";
 import { terser } from "rollup-plugin-terser";
@@ -69,32 +70,36 @@ const config = defineConfig(() => {
     css: {
       devSourcemap: true,
     },
-    test: {
+    test: defineTestConfig({
       dir: resolve("spec"),
       include: [resolve("spec") + "/**/*.{test,spec}.{js,mjs}"],
       setupFiles: [resolve("spec/setup.mjs")],
       coverage: {
-        provider: "c8",
+        provider: "v8",
         reporter: ["text", "html", "cobertura", "lcov"],
         all: true,
-        include: ["src/module/**/*.mjs"],
+        include: ["module/**/*.mjs"],
         // Exclude all files depending on a running Foundry instance
         exclude: [
-          "src/module/documents/**/*.mjs",
-          "src/module/applications/**/*.mjs",
-          "src/module/settings.mjs",
-          "src/module/sheets.mjs",
-          "src/module/metron.mjs",
+          ...coverageConfigDefaults.exclude,
+          "module/documents/**/*.mjs",
+          "module/applications/**/*.mjs",
+          "module/settings.mjs",
+          "module/sheets.mjs",
+          "module/metron.mjs",
         ],
         reportsDirectory: resolve("coverage"),
       },
-    },
+    }),
     plugins: [
       visualizer({
         sourcemap: true,
         template: "treemap",
       }),
-      copy({ targets: [{ src: COPY_FILES, dest: resolve("dist") }], hook: "writeBundle" }),
+      copy({
+        targets: [{ src: COPY_FILES, dest: resolve("dist") }],
+        hook: "writeBundle",
+      }),
     ],
   };
 });
