@@ -30,7 +30,7 @@ export const convertActivityData = (data, options = {}) => {
   }
 
   // Range
-  if (data.range?.override && data.range?.units) {
+  if (data.range?.override && data.range?.units && data.range.units in CONFIG.DND5E.movementUnits) {
     const units = getUnitFromString(data.range.units);
     const unitSystem = getUnitSystem(units);
     if (unitSystem !== target) {
