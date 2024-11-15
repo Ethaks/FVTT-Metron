@@ -98,5 +98,6 @@ export default function setup() {
       setProperty,
     },
   };
+  globalThis.CONFIG = { DND5E: { movementUnits: { ft: "ft" } } };
 }
 setup();
