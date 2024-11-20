@@ -62,6 +62,7 @@ export const convertActorData = (actor, options = {}) => {
 
 	// Senses and Movement (if not set by race)
 	if (!actor.items.some((i) => i.type === "race")) {
+		updateData.system.attributes ??= {};
 		for (const field of ["senses", "movement"]) {
 			const fieldData = actor.system?.attributes?.[field];
 			updateData.system.attributes[field] = convertDistanceField(fieldData, target);
