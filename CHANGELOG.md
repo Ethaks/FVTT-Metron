@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.6](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.5...v0.3.6) (2024-11-20)
+
+
+### Bug Fixes
+
+* prevent error when converting actors without race items ([e4da253](https://github.com/Ethaks/FVTT-Metron/commit/e4da253c25cb26a919f6fc346dea6bf470f3939b))
+
 ## [0.3.5](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.4...v0.3.5) (2024-11-15)
 
 
