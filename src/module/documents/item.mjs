@@ -72,7 +72,7 @@ export const convertItemData = (data, options = {}) => {
 		const units = getUnitFromString(systemData.target.template.units);
 		const unitSystem = getUnitSystem(units);
 		const value = systemData.target.template.size || 0;
-		if (unitSystem !== target && Number.isNumeric(value)) {
+		if (units && unitSystem !== target && Number.isNumeric(value)) {
 			updateData.system.target ??= {};
 			updateData.system.target.template = {
 				units: getOtherUnit(units),
