@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.7](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.6...v0.3.7) (2025-03-25)
+
+
+### Bug Fixes
+
+* only convert targets with convertable units ([a575365](https://github.com/Ethaks/FVTT-Metron/commit/a575365cff033e2d688f01732244591b89f21854))
+
 ## [0.3.6](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.5...v0.3.6) (2024-11-20)
 
 
