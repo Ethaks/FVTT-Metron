@@ -18,7 +18,7 @@ import * as strings from "./strings.mjs";
 import * as utils from "./utils.mjs";
 
 // Import style sheet
-import { onSheetHeaderButtons } from "./sheets.mjs";
+import { onSheetHeaderButtons, onSheetHeaderButtonsV2 } from "./sheets.mjs";
 
 // API
 export const metron = {
@@ -67,6 +67,10 @@ Hooks.on("getActorSheetHeaderButtons", onSheetHeaderButtons);
 Hooks.on("getItemSheetHeaderButtons", onSheetHeaderButtons);
 Hooks.on("getJournalSheetHeaderButtons", onSheetHeaderButtons);
 Hooks.on("getSceneConfigHeaderButtons", onSheetHeaderButtons);
+
+Hooks.on("getHeaderControlsActorSheetV2", onSheetHeaderButtonsV2);
+Hooks.on("getHeaderControlsItemSheet5e", onSheetHeaderButtonsV2);
+Hooks.on("getHeaderControlsSceneConfig", onSheetHeaderButtonsV2);
 
 // Context menu buttons
 Hooks.on("getCompendiumDirectoryEntryContext", (html, buttons) => {
