@@ -73,22 +73,22 @@ Hooks.on("getHeaderControlsItemSheet5e", onSheetHeaderButtonsV2);
 Hooks.on("getHeaderControlsSceneConfig", onSheetHeaderButtonsV2);
 
 // Context menu buttons
-Hooks.on("getCompendiumDirectoryEntryContext", (html, buttons) => {
+Hooks.on("getCompendiumContextOptions", (html, buttons) => {
 	buttons.push({
 		name: "METRON.Convert",
 		icon: '<i class="fas fa-pencil-ruler"></i>',
 		callback: (li) => {
-			const pack = game.packs.get(li.data("pack"));
+			const pack = game.packs.get(li.dataset.pack);
 			if (pack) return packs.convertPack(pack);
 		},
 	});
 });
-Hooks.on("getSceneDirectoryEntryContext", (html, buttons) => {
+Hooks.on("getSceneContextOptions", (html, buttons) => {
 	buttons.push({
 		name: "METRON.Convert",
 		icon: '<i class="fas fa-pencil-ruler"></i>',
 		callback: (li) => {
-			const scene = game.scenes.get(li.data("documentId"));
+			const scene = game.scenes.get(li.dataset.entryId);
 			if (scene) return metron.scene.convertScene(scene);
 		},
 	});
