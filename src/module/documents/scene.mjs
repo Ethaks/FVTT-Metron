@@ -82,7 +82,7 @@ const convertTokenActorData = (tokenData, options = {}) => {
 		// Handle item updates
 		if (actorUpdate.items?.length) {
 			const updates = new Map(actorUpdate.items.map((item) => [item._id, item]));
-			tokenData.actorData.items?.forEach((original) => {
+			tokenData.delta?.items?.forEach((original) => {
 				const update = updates.get(original._id);
 				if (update) foundry.utils.mergeObject(original, update);
 			});
