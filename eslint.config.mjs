@@ -22,6 +22,7 @@ export default [
 				game: "readonly",
 				Hooks: "readonly",
 				CONFIG: "readonly",
+				CONST: "readonly",
 				foundry: "readonly",
 				Application: "readonly",
 				Actor: "readonly",
