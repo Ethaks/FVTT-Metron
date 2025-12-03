@@ -22,6 +22,9 @@ npm-debug.log
 # Local configuration
 foundryconfig.json
 
+# Foundry files
+/foundry
+
 # Distribution files
 dist
 metron.zip
