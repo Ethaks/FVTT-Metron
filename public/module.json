@@ -10,14 +10,14 @@
 	"bugs": "https://github.com/Ethaks/FVTT-Metron/issues",
 	"changelog": "https://github.com/Ethaks/FVTT-Metron/blob/master/CHANGELOG.md",
 	"version": "0.3.7",
-	"compatibility": { "minimum": "12", "verified": "12" },
+	"compatibility": { "minimum": "13", "verified": "13" },
 	"esmodules": ["metron.js"],
 	"languages": [
 		{ "lang": "en", "name": "English", "path": "lang/en.json" },
 		{ "lang": "ja", "name": "日本語", "path": "lang/ja.json" }
 	],
 	"relationships": {
-		"systems": [{ "id": "dnd5e", "verified": "4.0.0" }],
+		"systems": [{ "id": "dnd5e", "verified": "5.0.0" }],
 		"requires": [],
 		"conflicts": []
 	},
