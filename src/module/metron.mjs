@@ -18,7 +18,7 @@ import * as strings from "./strings.mjs";
 import * as utils from "./utils.mjs";
 
 // Import style sheet
-import { onSheetHeaderButtons, onSheetHeaderButtonsV2 } from "./sheets.mjs";
+import { onSheetHeaderButtons } from "./sheets.mjs";
 
 // API
 export const metron = {
@@ -63,17 +63,13 @@ Hooks.once("ready", () => {
 });
 
 // Header buttons
-Hooks.on("getActorSheetHeaderButtons", onSheetHeaderButtons);
-Hooks.on("getItemSheetHeaderButtons", onSheetHeaderButtons);
+Hooks.on("getHeaderControlsActorSheetV2", onSheetHeaderButtons);
+Hooks.on("getHeaderControlsItemSheet5e", onSheetHeaderButtons);
 Hooks.on("getJournalSheetHeaderButtons", onSheetHeaderButtons);
-Hooks.on("getSceneConfigHeaderButtons", onSheetHeaderButtons);
-
-Hooks.on("getHeaderControlsActorSheetV2", onSheetHeaderButtonsV2);
-Hooks.on("getHeaderControlsItemSheet5e", onSheetHeaderButtonsV2);
-Hooks.on("getHeaderControlsSceneConfig", onSheetHeaderButtonsV2);
+Hooks.on("getHeaderControlsSceneConfig", onSheetHeaderButtons);
 
 // Context menu buttons
-Hooks.on("getCompendiumContextOptions", (html, buttons) => {
+Hooks.on("getCompendiumContextOptions", (_html, buttons) => {
 	buttons.push({
 		name: "METRON.Convert",
 		icon: '<i class="fas fa-pencil-ruler"></i>',
@@ -83,7 +79,7 @@ Hooks.on("getCompendiumContextOptions", (html, buttons) => {
 		},
 	});
 });
-Hooks.on("getSceneContextOptions", (html, buttons) => {
+Hooks.on("getSceneContextOptions", (_html, buttons) => {
 	buttons.push({
 		name: "METRON.Convert",
 		icon: '<i class="fas fa-pencil-ruler"></i>',
