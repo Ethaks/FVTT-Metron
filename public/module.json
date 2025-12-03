@@ -9,7 +9,7 @@
 	"readme": "https://github.com/Ethaks/FVTT-Metron/blob/master/README.md",
 	"bugs": "https://github.com/Ethaks/FVTT-Metron/issues",
 	"changelog": "https://github.com/Ethaks/FVTT-Metron/blob/master/CHANGELOG.md",
-	"version": "0.3.7",
+	"version": "0.4.0",
 	"compatibility": { "minimum": "13", "verified": "13" },
 	"esmodules": ["metron.js"],
 	"languages": [
@@ -23,6 +23,6 @@
 	},
 	"socket": false,
 	"manifest": "This is auto replaced",
-	"download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.3.7/module.zip",
+	"download": "https://github.com/Ethaks/FVTT-Metron/releases/download/v0.4.0/module.zip",
 	"library": false
 }

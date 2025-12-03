@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.7...v0.4.0) (2025-12-03)
+
+
+### Bug Fixes
+
+* context options ([6fa6d05](https://github.com/Ethaks/FVTT-Metron/commit/6fa6d051a3b79a517eafc41c2a863fb45317d7bc))
+* header button for dnd5e v5 ([b5bc05b](https://github.com/Ethaks/FVTT-Metron/commit/b5bc05b9db734b0dd9ba9eb92819ab0b346b0f05))
+* move all header buttons to new sheets ([3a8f479](https://github.com/Ethaks/FVTT-Metron/commit/3a8f47914f13837a6215daa91eaf84edb855460c))
+* use v13 delta path ([aa30b67](https://github.com/Ethaks/FVTT-Metron/commit/aa30b67495563d622d454d77b56e730308c9f8de))
+
 ## [0.3.7](https://github.com/Ethaks/FVTT-Metron/compare/v0.3.6...v0.3.7) (2025-03-25)
 
 
