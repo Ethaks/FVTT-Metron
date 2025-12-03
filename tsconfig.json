@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"noEmit": true,
+		"module": "ESNext",
+		"target": "ESNext",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"allowJs": true,
+		"checkJs": false,
+		"strict": true,
+		"paths": {
+			"@foundry/*": ["./foundry/*"]
+		}
+	},
+	"exclude": ["node_modules", "foundry/common/server.mjs"],
+	"include": [
+		"src/module/metron.mjs",
+		"**/*.d.ts",
+		"foundry/client/client.mjs",
+		"foundry/client/global.d.mts",
+		"foundry/common/**/*.mjs"
+	],
+	"typeAcquisition": {
+		"include": ["jquery"]
+	}
+}
